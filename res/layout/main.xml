@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/background">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:layout_gravity="left|center_vertical">
+        <TextView
+                android:layout_width="243dp"
+                android:layout_height="wrap_content"
+                android:text="DailyWin"
+                android:id="@+id/textView" android:textSize="30dp" android:layout_weight="1"
+                android:layout_gravity="center"/>
+        <Button
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:text="+"
+                android:id="@+id/addActivity" android:layout_gravity="center_vertical|right" android:textSize="40dp"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Daily"
+                android:id="@+id/toggleButton" android:layout_weight="1" android:layout_margin="0dp" />
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="weekly"
+                android:id="@+id/toggleButton1" android:layout_weight="1"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="random"
+                android:id="@+id/toggleButton2" android:layout_weight="1"/>
+    </LinearLayout>
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/listView" android:layout_gravity="center"/>
+</LinearLayout>
+
