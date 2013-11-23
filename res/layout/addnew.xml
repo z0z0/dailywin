@@ -11,70 +11,91 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="New Activity"
-            android:id="@+id/textView" android:layout_gravity="center"/>
-    <LinearLayout
+            android:id="@+id/textView" android:layout_gravity="center" android:textColor="@color/text"
+            android:textSize="27dp"/>
+    <LinearLayout android:background="@drawable/background"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_gravity="left|center_vertical">
+            android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
+            android:layout_margin="5dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:id="@+id/textView1" android:singleLine="false"/>
+                android:id="@+id/textView1" android:singleLine="false" android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" android:textColor="@color/text" android:layout_gravity="center"/>
         <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="New EditText"
-                android:id="@+id/editText"/>
+                android:id="@+id/editText" android:layout_margin="3dp" android:textColor="@color/text"
+                android:layout_gravity="center"/>
     </LinearLayout>
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent"
                   android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
-                  android:id="@+id/linearLayout">
+                  android:id="@+id/linearLayout" android:baselineAligned="false" android:background="@drawable/background"
+                  android:layout_margin="5dp">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Category"
-                  android:id="@+id/textView2" android:singleLine="false" android:layout_gravity="center"/>
+                  android:id="@+id/textView2" android:singleLine="false" android:layout_gravity="center"
+                  android:textColor="@color/text" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"/>
         <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/category"/>
+                android:id="@+id/category" android:layout_margin="3dp"/>
     </LinearLayout>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="frequency"
-            android:id="@+id/textView3" android:layout_gravity="left|center_vertical"/>
-    <RadioGroup
-            android:id="@+id/radioFrequency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Random"
-                android:id="@+id/random" android:layout_gravity="left|center_vertical" android:textColor="#010101"/>
-        <RadioButton
-                android:layout_width="486dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/daily" android:layout_gravity="left|center_vertical" android:text="Daily"
-                android:textColor="#010101"/>
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Weekly"
-                android:id="@+id/weekly" android:layout_gravity="left|center_vertical" android:textColor="#010101"/>
-    </RadioGroup>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Importance"
-            android:id="@+id/textView4"/>
-    <SeekBar
+    <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar" android:layout_gravity="center" android:max="3"/>
+            android:layout_height="wrap_content" android:layout_gravity="center"
+            android:background="@drawable/background" android:layout_margin="5dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="frequency"
+                android:id="@+id/textView3" android:layout_gravity="left|center_vertical" android:textColor="@color/text"
+                android:layout_margin="5dp"/>
+        <RadioGroup
+                android:id="@+id/radioFrequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Random"
+                    android:id="@+id/random" android:layout_gravity="left|center_vertical" android:textColor="#010101"/>
+            <RadioButton
+                    android:layout_width="486dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/daily" android:layout_gravity="left|center_vertical" android:text="Daily"
+                    android:textColor="#010101"/>
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weekly"
+                    android:id="@+id/weekly" android:layout_gravity="left|center_vertical" android:textColor="#010101"/>
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center" android:layout_margin="5dp"
+            android:background="@drawable/background">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Importance"
+                android:id="@+id/textView4" android:textColor="@color/text" android:layout_margin="5dp"/>
+        <SeekBar
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar" android:layout_gravity="center" android:max="3" android:layout_margin="5dp"/>
+    </LinearLayout>
     <Button
-            android:layout_width="fill_parent"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="save"
-            android:id="@+id/saveButton"/>
+            android:id="@+id/saveButton" android:background="@drawable/background" android:layout_gravity="center|bottom"
+            android:layout_margin="15dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="27dp"
+            android:textColor="@color/text"/>
 </LinearLayout>
