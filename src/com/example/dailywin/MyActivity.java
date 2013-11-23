@@ -1,12 +1,12 @@
 package com.example.dailywin;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 import com.example.dailywin.db.MyDB;
 
@@ -41,9 +41,31 @@ public class MyActivity extends Activity {
         });
 
         db = new MyDB(this);
-        Cursor cursor = db.selectRecords();
+        Cursor cursor = db.selectRecordsWithCount();
         listView = (ListView) findViewById(R.id.listView);
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.EMP_NAME}, new int[]{R.id.listItemLabel}, CursorAdapter.FLAG_AUTO_REQUERY);
+        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.EMP_NAME, "count1"}, new int[]{R.id.listItemLabel, R.id.itemCount}, CursorAdapter.FLAG_AUTO_REQUERY);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                new AlertDialog.Builder(self)
+                        .setTitle("Did you done it?")
+                        .setMessage("Did you done it?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Cursor c = adapter.getCursor();
+                                c.moveToPosition(position);
+                                db.createEvent(c.getInt(0));
+                                adapter.swapCursor(db.selectRecordsWithCount());
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .show();
+            }
+        });
         listView.setAdapter(adapter);
 
         dailyButton = (Button) findViewById(R.id.dailyButton);
@@ -64,7 +86,7 @@ public class MyActivity extends Activity {
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.swapCursor(db.selectRecordsByFreq("random"));
+                adapter.swapCursor(db.selectRecordsWithCount());
             }
         });
     }
@@ -73,7 +95,7 @@ public class MyActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.swapCursor(db.selectRecords());
+        adapter.swapCursor(db.selectRecordsWithCount());
 
     }
 }

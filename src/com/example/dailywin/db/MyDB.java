@@ -28,6 +28,11 @@ public class MyDB {
     public final static String EMP_FREQ = "freq";  // name of employee
     public final static String EMP_IMP = "importance";  // name of employee
 
+    public final static String EVN_TABLE = "Event"; // name of table
+    public final static String EVN_ID = "_id"; // id value for employee
+    public final static String EVN_CREATED = "created";  // name of employee
+    public final static String EVN_ACTIVITY = "activity_id";  // name of employee
+
     /**
      * @param context
      */
@@ -47,6 +52,13 @@ public class MyDB {
         return database.insert(EMP_TABLE, null, values);
     }
 
+    public long createEvent(Integer activityId) {
+        ContentValues values = new ContentValues();
+        values.put(EVN_ACTIVITY, activityId);
+        values.put(EVN_CREATED, new Date().toString());
+        return database.insert(EVN_TABLE, null, values);
+    }
+
     public Cursor selectRecords() {
         String[] cols = new String[]{EMP_ID, EMP_NAME, EMP_CAT, EMP_CREATED, EMP_FREQ, EMP_IMP};
         Cursor mCursor = database.query(true, EMP_TABLE, cols, null
@@ -57,17 +69,20 @@ public class MyDB {
         return mCursor;
     }
 
-    public Cursor selectRecordsByFreq(String freq) {
-        String[] cols = new String[]{EMP_ID, EMP_NAME, EMP_CAT, EMP_CREATED, EMP_FREQ, EMP_IMP};
-        Cursor mCursor = database.query(true, EMP_TABLE, cols, param(EMP_FREQ, freq)
-                , null, null, null, null, null);
+    public Cursor selectRecordsWithCount() {
+        Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 from Activity t1 left join Event t2 on t2.activity_id=t1._id group by t1._id ", null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor;
     }
 
-    private String param(String name, String value) {
-        return name + "='" + value + "'";
+    public Cursor selectRecordsByFreq(String freq) {
+        Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 from Activity t1 left join Event t2 on t2.activity_id=t1._id where t1.freq='" + freq + "' group by t1._id", null);
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
     }
+
 }
