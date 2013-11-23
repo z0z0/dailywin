@@ -21,6 +21,9 @@ public class MyActivity extends Activity {
     private MyDB db;
     private ListView listView;
     private SimpleCursorAdapter adapter;
+    private Button dailyButton;
+    private Button weeklyButton;
+    private Button randomButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,28 @@ public class MyActivity extends Activity {
         listView = (ListView) findViewById(R.id.listView);
         adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.EMP_NAME}, new int[]{R.id.listItemLabel}, CursorAdapter.FLAG_AUTO_REQUERY);
         listView.setAdapter(adapter);
+
+        dailyButton = (Button) findViewById(R.id.dailyButton);
+        weeklyButton = (Button) findViewById(R.id.weeklyButton);
+        randomButton = (Button) findViewById(R.id.randomButton);
+        dailyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.swapCursor(db.selectRecordsByFreq("daily"));
+            }
+        });
+        weeklyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.swapCursor(db.selectRecordsByFreq("weekly"));
+            }
+        });
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.swapCursor(db.selectRecordsByFreq("random"));
+            }
+        });
     }
 
 

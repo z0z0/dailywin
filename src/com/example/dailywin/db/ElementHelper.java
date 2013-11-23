@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ElementHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "DBName";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_CREATE = "create table Activity ( _id integer primary key,name text not null,category text not null,created DATETIME not null, freq text not null, importance integer not null);";
 
     public ElementHelper(Context context) {

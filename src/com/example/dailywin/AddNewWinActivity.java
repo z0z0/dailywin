@@ -41,7 +41,9 @@ public class AddNewWinActivity extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.createRecord(name.getText().toString(), category.getSelectedItem().toString(), findViewById(radioGroup.getCheckedRadioButtonId()).toString(), seekBar.getProgress());
+                int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+                String freq = checkedRadioButtonId == R.id.daily ? "daily" : checkedRadioButtonId == R.id.weekly ? "weekly" : "random";
+                db.createRecord(name.getText().toString(), category.getSelectedItem().toString(), freq, seekBar.getProgress());
                 finish();
             }
         });
