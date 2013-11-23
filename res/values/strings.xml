@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">dailywin</string>
+    <string-array name="category_array">
+        <item>Health</item>
+        <item>Work</item>
+        <item>Earth</item>
+    </string-array>
 </resources>
