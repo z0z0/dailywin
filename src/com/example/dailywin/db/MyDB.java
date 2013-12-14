@@ -63,6 +63,12 @@ public class MyDB {
         return database.insert(EVN_TABLE, null, values);
     }
 
+    public long archiveEvent(Integer activityId){
+        ContentValues values = new ContentValues();
+        values.put(WIN_F_ARH, 1);
+        return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId +"", null);
+    }
+
     public Cursor selectRecords() {
         String[] cols = new String[]{WIN_ID, WIN_NAME, WIN_CAT, WIN_CREATED, WIN_FREQ, WIN_IMP, WIN_F_ARH};
         Cursor mCursor = database.query(true, WIN_TABLE, cols, null
@@ -76,7 +82,7 @@ public class MyDB {
     public Cursor selectRecordsWithCount() {
         Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 " +
                                           " from DailyWin t1 left join Event t2 on t2.dailywin_id=t1._id " +
-                                          " where t1.f_arh = 0  " +
+                                          " where t1.f_arh = 0 " +
                                           "  group by t1._id ", null);
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -87,8 +93,8 @@ public class MyDB {
     public Cursor selectRecordsByFreq(String freq) {
         Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 " +
                 "from DailyWin t1 left join Event t2 on t2.dailywin_id=t1._id " +
-                "where t1.freq='" + freq + "' group by t1._id " +
-                "and t1.f_arh = 0", null);
+                "where t1.freq='" + freq + "' and t1.f_arh = 0" +
+                " group by t1._id", null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }

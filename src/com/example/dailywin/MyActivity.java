@@ -44,29 +44,48 @@ public class MyActivity extends Activity {
         db = new MyDB(this);
         Cursor cursor = db.selectRecordsWithCount();
         listView = (ListView) findViewById(R.id.listView);
+
+        final SwipeDetector swipeDetector = new SwipeDetector();
+        listView.setOnTouchListener(swipeDetector);
+
         adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "count1"}, new int[]{R.id.listItemLabel, R.id.itemCount}, CursorAdapter.FLAG_AUTO_REQUERY);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                new AlertDialog.Builder(self)
-                        .setTitle("Have you done it?")
-                        .setMessage("Have you done it?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                if (swipeDetector.swipeDetected()) {
+                    if (swipeDetector.getAction() == SwipeDetector.Action.LR) {
+
+                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Upravo si cekirala aktivnost. Toliko.")
+                                .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Cursor c = adapter.getCursor();
                                 c.moveToPosition(position);
                                 db.createEvent(c.getInt(0));
                                 adapter.swapCursor(db.selectRecordsWithCount());
+                                dialog.cancel();
                             }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                            }).show();
 
-                            }
-                        })
-                        .show();
+                    }
+                    if (swipeDetector.getAction() == SwipeDetector.Action.RL) {
+                        Cursor c = adapter.getCursor();
+                        c.moveToPosition(position);
+                        db.archiveEvent(c.getInt(0));
+                        adapter.swapCursor(db.selectRecordsWithCount());
+                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Maće maće ")
+                                .setPositiveButton("M'kay", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                }).show();
+                    }
+                    adapter.notifyDataSetChanged();
+
+                }
             }
         });
+
         listView.setAdapter(adapter);
 
         dailyButton = (TextView) findViewById(R.id.dailyButton);
