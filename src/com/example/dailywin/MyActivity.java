@@ -42,17 +42,19 @@ public class MyActivity extends Activity {
         });
 
         db = new MyDB(this);
-        Cursor cursor = db.selectRecordsWithCount();
+//        Cursor cursor = db.selectRecordsWithCount();
+        Cursor cursor = db.selectCheckedRecordsByFreq("daily");
         listView = (ListView) findViewById(R.id.listView);
 
         final SwipeDetector swipeDetector = new SwipeDetector();
         listView.setOnTouchListener(swipeDetector);
 
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "count1"}, new int[]{R.id.listItemLabel, R.id.itemCount}, CursorAdapter.FLAG_AUTO_REQUERY);
+        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "count1", "checked"}, new int[]{R.id.listItemLabel, R.id.itemCount, R.id.itemChecked}, CursorAdapter.FLAG_AUTO_REQUERY);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
                 if (swipeDetector.swipeDetected()) {
                     if (swipeDetector.getAction() == SwipeDetector.Action.LR) {
 
@@ -60,9 +62,10 @@ public class MyActivity extends Activity {
                                 .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Cursor c = adapter.getCursor();
+                                String freq = c.getString(4);
                                 c.moveToPosition(position);
                                 db.createEvent(c.getInt(0));
-                                adapter.swapCursor(db.selectRecordsWithCount());
+                                adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
                                 dialog.cancel();
                             }
                             }).show();
@@ -70,9 +73,12 @@ public class MyActivity extends Activity {
                     }
                     if (swipeDetector.getAction() == SwipeDetector.Action.RL) {
                         Cursor c = adapter.getCursor();
+                        //gets frequency
+                        String freq = c.getString(4);
+                        System.out.println("  ------------------------ " + freq);
                         c.moveToPosition(position);
                         db.archiveEvent(c.getInt(0));
-                        adapter.swapCursor(db.selectRecordsWithCount());
+                        adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
                         new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Maće maće ")
                                 .setPositiveButton("M'kay", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
@@ -94,23 +100,23 @@ public class MyActivity extends Activity {
         dailyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.swapCursor(db.selectRecordsByFreq("daily"));
-//                adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
+//                adapter.swapCursor(db.selectRecordsByFreq("daily"));
+                adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
 
             }
         });
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.swapCursor(db.selectRecordsByFreq("weekly"));
-//                adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
+//                adapter.swapCursor(db.selectRecordsByFreq("weekly"));
+                adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
             }
         });
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapter.swapCursor(db.selectRecordsWithCount());
-//                adapter.swapCursor(db.selectCheckedRecordsByFreq("random"));
+//                adapter.swapCursor(db.selectRecordsWithCount());
+                adapter.swapCursor(db.selectCheckedRecordsByFreq("random"));
             }
         });
     }
@@ -119,7 +125,7 @@ public class MyActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.swapCursor(db.selectRecordsWithCount());
+        adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
 
     }
 }

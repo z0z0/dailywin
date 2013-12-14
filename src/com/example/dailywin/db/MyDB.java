@@ -79,6 +79,7 @@ public class MyDB {
         return mCursor;
     }
 
+    @Deprecated
     public Cursor selectRecordsWithCount() {
         Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 " +
                                           " from DailyWin t1 left join Event t2 on t2.dailywin_id=t1._id " +
