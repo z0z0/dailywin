@@ -44,7 +44,7 @@ public class MyActivity extends Activity {
         db = new MyDB(this);
         Cursor cursor = db.selectRecordsWithCount();
         listView = (ListView) findViewById(R.id.listView);
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.EMP_NAME, "count1"}, new int[]{R.id.listItemLabel, R.id.itemCount}, CursorAdapter.FLAG_AUTO_REQUERY);
+        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "count1"}, new int[]{R.id.listItemLabel, R.id.itemCount}, CursorAdapter.FLAG_AUTO_REQUERY);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -76,18 +76,22 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 adapter.swapCursor(db.selectRecordsByFreq("daily"));
+//                adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
+
             }
         });
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 adapter.swapCursor(db.selectRecordsByFreq("weekly"));
+//                adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
             }
         });
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 adapter.swapCursor(db.selectRecordsWithCount());
+//                adapter.swapCursor(db.selectCheckedRecordsByFreq("random"));
             }
         });
     }

@@ -15,8 +15,8 @@ public class ElementHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "DBName";
     private static final int DATABASE_VERSION = 6;
-    private static final String DATABASE_CREATE_TABLE1 = "create table Activity ( _id integer primary key,name text not null,category text not null,created DATETIME not null, freq text not null, importance integer not null);";
-    private static final String DATABASE_CREATE_TABLE2 = "create table Event ( _id integer primary key,created DATETIME not null, activity_id integer not null);";
+    private static final String DATABASE_CREATE_TABLE1 = "create table DailyWin ( _id integer primary key,name text not null,category text not null,created DATETIME not null, freq text not null, importance integer not null, f_arh int not null);";
+    private static final String DATABASE_CREATE_TABLE2 = "create table Event ( _id integer primary key,created DATETIME not null, dailywin_id integer not null);";
 
     public ElementHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,7 +29,7 @@ public class ElementHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS Activity");
+        db.execSQL("DROP TABLE IF EXISTS DailyWin");
         db.execSQL("DROP TABLE IF EXISTS Event");
         onCreate(db);
     }
