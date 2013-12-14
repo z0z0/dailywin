@@ -19,19 +19,22 @@ public class MyDB {
 
     private SQLiteDatabase database;
 
-    public final static String EMP_TABLE = "Activity"; // name of table
+    public final static String WIN = "DailyWin"; // name of table
 
-    public final static String EMP_ID = "_id"; // id value for employee
-    public final static String EMP_NAME = "name";  // name of employee
-    public final static String EMP_CAT = "category";  // name of employee
-    public final static String EMP_CREATED = "created";  // name of employee
-    public final static String EMP_FREQ = "freq";  // name of employee
-    public final static String EMP_IMP = "importance";  // name of employee
+    public final static String WIN_ID = "_id"; // id value for daily win
+    public final static String WIN_NAME = "name";  // name of daily win
+    public final static String WIN_CAT = "category";  // activity category which we wont use for now
+    public final static String WIN_CREATED = "created";  // date created
+    public final static String WIN_FREQ = "freq";  // frequency : daily/weekly/random
+    public final static String WIN_IMP = "importance";  // importance 0-100
+    public final static String WIN_F_ARH = "f_arh"; //
 
     public final static String EVN_TABLE = "Event"; // name of table
-    public final static String EVN_ID = "_id"; // id value for employee
-    public final static String EVN_CREATED = "created";  // name of employee
-    public final static String EVN_ACTIVITY = "activity_id";  // name of employee
+    public final static String EVN_WIN = "dailywin_id";  // id of daily win
+    public final static String EVN_ID = "_id"; // id value
+    public final static String EVN_CREATED = "created";  // timestamp when daily win is checked
+
+
 
     /**
      * @param context
@@ -44,24 +47,24 @@ public class MyDB {
 
     public long createRecord(String name, String category, String freq, Integer importance) {
         ContentValues values = new ContentValues();
-        values.put(EMP_NAME, name);
-        values.put(EMP_CAT, category);
-        values.put(EMP_CREATED, new Date().toString());
-        values.put(EMP_FREQ, freq);
-        values.put(EMP_IMP, importance);
-        return database.insert(EMP_TABLE, null, values);
+        values.put(WIN_NAME, name);
+        values.put(WIN_CAT, category);
+        values.put(WIN_CREATED, new Date().toString());
+        values.put(WIN_FREQ, freq);
+        values.put(WIN_IMP, importance);
+        return database.insert(WIN, null, values);
     }
 
     public long createEvent(Integer activityId) {
         ContentValues values = new ContentValues();
-        values.put(EVN_ACTIVITY, activityId);
+        values.put(EVN_WIN, activityId);
         values.put(EVN_CREATED, new Date().toString());
         return database.insert(EVN_TABLE, null, values);
     }
 
     public Cursor selectRecords() {
-        String[] cols = new String[]{EMP_ID, EMP_NAME, EMP_CAT, EMP_CREATED, EMP_FREQ, EMP_IMP};
-        Cursor mCursor = database.query(true, EMP_TABLE, cols, null
+        String[] cols = new String[]{WIN_ID, WIN_NAME, WIN_CAT, WIN_CREATED, WIN_FREQ, WIN_IMP, WIN_F_ARH};
+        Cursor mCursor = database.query(true, WIN, cols, null
                 , null, null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
@@ -70,7 +73,10 @@ public class MyDB {
     }
 
     public Cursor selectRecordsWithCount() {
-        Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 from Activity t1 left join Event t2 on t2.activity_id=t1._id group by t1._id ", null);
+        Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1" +
+                                          " from DailyWin t1 left join Event t2 on t2.dailywin_id=t1._id " +
+                                          " where t1.f_arh = false " +
+                                          "  group by t1._id ", null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
@@ -78,7 +84,10 @@ public class MyDB {
     }
 
     public Cursor selectRecordsByFreq(String freq) {
-        Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 from Activity t1 left join Event t2 on t2.activity_id=t1._id where t1.freq='" + freq + "' group by t1._id", null);
+        Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 " +
+                "from DailyWin t1 left join Event t2 on t2.activity_id=t1._id " +
+                "where t1.freq='" + freq + "' group by t1._id " +
+                "and t1.f_arh = false", null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
