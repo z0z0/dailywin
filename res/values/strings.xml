@@ -2,8 +2,10 @@
 <resources>
     <string name="app_name">dailywin</string>
     <string-array name="category_array">
-        <item>Health</item>
         <item>Work</item>
-        <item>Earth</item>
+        <item>Health</item>
+        <item>Love</item>
+        <item>Pleasure</item>
+        <item>Social</item>
     </string-array>
 </resources>

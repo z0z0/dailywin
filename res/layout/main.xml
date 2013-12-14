@@ -2,43 +2,88 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="@color/background">
+              android:layout_height="wrap_content"
+              android:background="#c0c0c0">
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_gravity="left|center_vertical">
+            android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
+        android:background="#c0c0c0"
+        android:clickable="false">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/imageView"
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            android:layout_gravity="left" />
+
         <TextView
-                android:layout_width="243dp"
-                android:layout_height="wrap_content"
-                android:text="DailyWin"
-                android:id="@+id/textView" android:textSize="30dp" android:layout_weight="1"
-                android:layout_gravity="center"/>
+            android:layout_width="248dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:text="NAILITAPP XOXO"
+            android:gravity="center|center_vertical"
+            android:autoText="false"
+            android:inputType="none"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+
         <Button
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="+"
-                android:id="@+id/addActivity" android:layout_gravity="center_vertical|right" android:textSize="40dp"/>
+                android:id="@+id/addActivity"
+            android:textSize="40dp"
+            android:longClickable="false"
+            android:textColor="#fff"
+            android:layout_marginRight="0dp"
+            android:background="#b0b0b0"
+            android:shadowColor="#666"
+            android:singleLine="false"
+            android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-        <Button
+            android:layout_height="48dp"
+            >
+        <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Daily"
-                android:id="@+id/dailyButton" android:layout_weight="1" android:layout_margin="0dp" />
-        <Button
+                android:id="@+id/dailyButton" android:layout_weight="1" android:layout_margin="0dp"
+            android:autoText="false"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp" />
+
+        <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="weekly"
-                android:id="@+id/weeklyButton" android:layout_weight="1"/>
-        <Button
+                android:text="Weekly"
+                android:id="@+id/weeklyButton" android:layout_weight="1"
+            android:clickable="true"
+            android:layout_marginTop="0dp"
+            android:longClickable="false"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:autoText="true" />
+        <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="random"
-                android:id="@+id/randomButton" android:layout_weight="1"/>
+                android:text="Random"
+                android:id="@+id/randomButton" android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp" />
     </LinearLayout>
     <ListView
             android:layout_width="fill_parent"

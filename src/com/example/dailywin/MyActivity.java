@@ -21,12 +21,13 @@ public class MyActivity extends Activity {
     private MyDB db;
     private ListView listView;
     private SimpleCursorAdapter adapter;
-    private Button dailyButton;
-    private Button weeklyButton;
-    private Button randomButton;
+    private TextView dailyButton;
+    private TextView weeklyButton;
+    private TextView randomButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         self = this;
         setContentView(R.layout.main);
@@ -48,8 +49,8 @@ public class MyActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 new AlertDialog.Builder(self)
-                        .setTitle("Did you done it?")
-                        .setMessage("Did you done it?")
+                        .setTitle("Have you done it?")
+                        .setMessage("Have you done it?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Cursor c = adapter.getCursor();
@@ -68,9 +69,9 @@ public class MyActivity extends Activity {
         });
         listView.setAdapter(adapter);
 
-        dailyButton = (Button) findViewById(R.id.dailyButton);
-        weeklyButton = (Button) findViewById(R.id.weeklyButton);
-        randomButton = (Button) findViewById(R.id.randomButton);
+        dailyButton = (TextView) findViewById(R.id.dailyButton);
+        weeklyButton = (TextView) findViewById(R.id.weeklyButton);
+        randomButton = (TextView) findViewById(R.id.randomButton);
         dailyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
