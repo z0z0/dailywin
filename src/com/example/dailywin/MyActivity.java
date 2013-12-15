@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.example.dailywin.db.MyDB;
@@ -58,11 +59,15 @@ public class MyActivity extends Activity {
                 if (swipeDetector.swipeDetected()) {
                     if (swipeDetector.getAction() == SwipeDetector.Action.LR) {
 
+
+
                         new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Upravo si cekirala aktivnost. Toliko.")
                                 .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Cursor c = adapter.getCursor();
                                 String freq = c.getString(4);
+                                Log.i("MyActivity", freq);
+                                Log.i("DB__________________", c.getString(3));
                                 c.moveToPosition(position);
                                 db.createEvent(c.getInt(0));
                                 adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
@@ -75,6 +80,8 @@ public class MyActivity extends Activity {
                         Cursor c = adapter.getCursor();
                         //gets frequency
                         String freq = c.getString(4);
+                        Log.i("MyActivity", freq);
+                        Log.i("DB__________________", c.getString(3));
                         System.out.println("  ------------------------ " + freq);
                         c.moveToPosition(position);
                         db.archiveEvent(c.getInt(0));

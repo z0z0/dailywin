@@ -78,7 +78,7 @@ public class MyDB {
     public long archiveEvent(Integer activityId){
         ContentValues values = new ContentValues();
         values.put(WIN_F_ARH, 1);
-        return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId + "", null);
+        return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId +"", null);
     }
 
     public Cursor selectRecords() {
@@ -136,6 +136,21 @@ public class MyDB {
             mCursor.moveToFirst();
         }
         return mCursor;
+    }
+
+    public boolean selectIfRecordChecked(int id) {
+        Cursor mCursor = database.rawQuery("select count(e._id) as checked " +
+                "from DailyWin dw, Event e " +
+                "where e.created >= date('now') " +
+                " and dw._id = '"+ id +"' " +
+                " and e.dailywin_id = dw._id  " +
+                " and  dw.f_arh = 0", null);
+
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor.getInt(0)>0;
     }
 
 }
