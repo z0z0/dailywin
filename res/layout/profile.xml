@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#c0c0c0"
+   >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:id="@+id/linearLayou">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/menuText"
+            android:text="@string/profile"
+            android:gravity="center|center_vertical"
+            android:autoText="false"
+            android:inputType="none"
+            android:textStyle="bold"
+            android:typeface="monospace"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        android:baselineAligned="false"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:baselineAligned="false"
+            android:layoutMode="opticalBounds"
+            android:divider="#350a34"
+            android:id="@+id/historyLayout"
+            android:focusableInTouchMode="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/buttonHistory"
+                android:clickable="false"
+                android:textAlignment="center"
+                android:maxWidth="70px"
+                android:maxHeight="70px"
+                android:minHeight="50px"
+                android:minWidth="50px"
+                android:background="@android:drawable/ic_input_get"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="0.3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/historyText"
+                android:id="@+id/textHistory"
+                android:textAlignment="center"
+                android:gravity="center|center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:clickable="true"
+            android:id="@+id/badgesLayout"
+            android:focusableInTouchMode="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/buttonBadges"
+                android:clickable="false"
+                android:textAlignment="center"
+                android:maxWidth="70px"
+                android:maxHeight="70px"
+                android:minHeight="50px"
+                android:minWidth="50px"
+                android:background="@android:drawable/ic_menu_my_calendar"
+                android:layout_alignParentTop="true"
+                android:focusable="true"
+                android:layout_alignParentRight="true"
+                android:layout_weight="0.3"
+                android:contentDescription="badges" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/badgesText"
+                android:id="@+id/textBadges"
+                android:textAlignment="center"
+                android:gravity="center|center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        android:baselineAligned="false"
+        android:id="@+id/linearLayout2"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:baselineAligned="false"
+            android:layoutMode="opticalBounds"
+            android:divider="#350a34"
+            android:focusableInTouchMode="true"
+            android:id="@+id/settingsLayout">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageButton"
+                android:clickable="false"
+                android:textAlignment="center"
+                android:maxWidth="70px"
+                android:maxHeight="70px"
+                android:minHeight="50px"
+                android:minWidth="50px"
+                android:background="@android:drawable/ic_dialog_map"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="0.3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/textSettings"
+                android:id="@+id/settingsText"
+                android:textAlignment="center"
+                android:gravity="center|center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.5"
+            android:clickable="true"
+            android:id="@+id/unknownLayout"
+            android:focusableInTouchMode="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageButton2"
+                android:clickable="false"
+                android:textAlignment="center"
+                android:maxWidth="70px"
+                android:maxHeight="70px"
+                android:minHeight="50px"
+                android:minWidth="50px"
+                android:background="@android:drawable/ic_menu_mylocation"
+                android:layout_alignParentTop="true"
+                android:focusable="true"
+                android:layout_alignParentRight="true"
+                android:layout_weight="0.3"
+                android:contentDescription="badges" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Unknown"
+                android:id="@+id/textView2"
+                android:textAlignment="center"
+                android:gravity="center|center_vertical" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

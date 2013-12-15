@@ -15,9 +15,10 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="0.2"
-            android:id="@+id/imageView"
+            android:id="@+id/profileView"
             android:src="@android:drawable/ic_menu_sort_by_size"
-            android:layout_gravity="left" />
+            android:layout_gravity="left"
+            android:clickable="true" />
 
         <TextView
             android:layout_width="0dp"

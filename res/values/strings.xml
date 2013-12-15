@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">dailywin</string>
+    <string name="historyText">HISTORY</string>
+    <string name="badgesText">BAGDES</string>
+    <string name="textSettings">SETTINGS</string>
+    <string name="profile">PROFILE</string>
+    <string name="historyHeader">YOUR HISTORY OF NAILING IT</string>
     <string-array name="category_array">
         <item>Work</item>
         <item>Health</item>

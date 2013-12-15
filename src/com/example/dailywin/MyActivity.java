@@ -15,6 +15,7 @@ import com.example.dailywin.db.MyDB;
 public class MyActivity extends Activity {
 
     private Button addActivityButton;
+    private ImageView profileImageView;
 
     /**
      * Called when the activity is first created.
@@ -41,6 +42,15 @@ public class MyActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(self, AddNewWinActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        profileImageView = (ImageView) findViewById(R.id.profileView);
+        profileImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(self, Profile.class);
                 startActivity(intent);
             }
         });
