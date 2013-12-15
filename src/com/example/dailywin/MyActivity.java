@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
+import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
 
 public class MyActivity extends Activity {
@@ -63,8 +64,7 @@ public class MyActivity extends Activity {
         final SwipeDetector swipeDetector = new SwipeDetector();
         listView.setOnTouchListener(swipeDetector);
 
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "checked"}, new int[]{R.id.listItemLabel, R.id.itemChecked}, CursorAdapter.FLAG_AUTO_REQUERY);
-
+        adapter = new ListViewAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "checked"}, new int[]{R.id.listItemLabel, R.id.itemChecked}, CursorAdapter.FLAG_AUTO_REQUERY);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -116,6 +116,7 @@ public class MyActivity extends Activity {
         });
 
         listView.setAdapter(adapter);
+
 
         dailyButton = (TextView) findViewById(R.id.dailyButton);
         weeklyButton = (TextView) findViewById(R.id.weeklyButton);
