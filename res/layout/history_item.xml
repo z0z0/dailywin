@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="5dp"
+    android:background="@drawable/background"
+    android:showDividers="none"
+    android:id="@+id/historyItemLayout">
+
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="50dip"
+        android:layout_height="50dip" />
+
+    <TextView
+        android:id="@+id/historyItemLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:textColor="@color/text"
+        android:gravity="center"
+        android:width="0dp"
+        android:layout_weight="0.6"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="@dimen/listItemTextSize" />
+
+
+    <TextView
+        android:id="@+id/historyItemTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:textColor="@color/text"
+        android:gravity="left"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="@dimen/listItemTextSize" />
+
+</LinearLayout>

@@ -37,9 +37,9 @@ public class ListViewAdapter extends SimpleCursorAdapter {
 //                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        View rowView = inflater.inflate(R.layout.list_item, parent, false);
 
-        TextView Labela = (TextView) rowView.findViewById(R.id.listItemLabel);
+        TextView labela = (TextView) rowView.findViewById(R.id.listItemLabel);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
-        Labela.setText(c.getString(1));
+        labela.setText(c.getString(1));
         // Change the icon for Windows and iPhone
         int s = c.getInt(7);
         if (s == 1) {

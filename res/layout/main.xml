@@ -4,9 +4,10 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content">
     <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
         android:clickable="false"
         android:gravity="bottom">
 
@@ -32,11 +33,11 @@
             android:gravity="center|center_vertical" />
 
         <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:text="+"
-                android:id="@+id/addActivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="+"
+            android:id="@+id/addActivity"
             android:textSize="40dp"
             android:longClickable="false"
             android:textColor="#fff"
@@ -46,17 +47,21 @@
             android:singleLine="false"
             android:textStyle="bold" />
     </LinearLayout>
+
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
         android:baselineAligned="false"
         android:layout_marginBottom="-7dp">
+
         <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Daily"
-                android:id="@+id/dailyButton" android:layout_weight="1" android:layout_margin="0dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Daily"
+            android:id="@+id/dailyButton"
+            android:layout_weight="1"
+            android:layout_margin="0dp"
             android:autoText="false"
             android:layout_gravity="center"
             android:gravity="center"
@@ -65,10 +70,11 @@
             android:paddingTop="7dp" />
 
         <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Weekly"
-                android:id="@+id/weeklyButton" android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Weekly"
+            android:id="@+id/weeklyButton"
+            android:layout_weight="1"
             android:clickable="true"
             android:layout_marginTop="0dp"
             android:longClickable="false"
@@ -78,11 +84,13 @@
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
             android:autoText="true" />
+
         <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="Random"
-                android:id="@+id/randomButton" android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Random"
+            android:id="@+id/randomButton"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="bold"
@@ -90,11 +98,12 @@
             android:paddingBottom="7dp"
             android:autoText="false" />
     </LinearLayout>
+
     <ListView
-            android:layout_width="fill_parent"
-            android:dividerHeight="10dp"
+        android:layout_width="fill_parent"
+        android:dividerHeight="10dp"
         android:layout_height="fill_parent"
-            android:id="@+id/listView"
+        android:id="@+id/listView"
         android:layout_marginTop="15dp"
         android:layout_gravity="top" />
 </LinearLayout>
