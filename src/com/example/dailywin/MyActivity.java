@@ -34,6 +34,8 @@ public class MyActivity extends Activity {
         self = this;
         setContentView(R.layout.main);
         addActivityButton = (Button) findViewById(R.id.addActivity);
+        dailyButton = (TextView) findViewById(R.id.dailyButton);
+        dailyButton.setBackgroundColor(0xFFA537FD);
 
         addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +53,8 @@ public class MyActivity extends Activity {
         final SwipeDetector swipeDetector = new SwipeDetector();
         listView.setOnTouchListener(swipeDetector);
 
-        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "count1", "checked"}, new int[]{R.id.listItemLabel, R.id.itemCount, R.id.itemChecked}, CursorAdapter.FLAG_AUTO_REQUERY);
+        adapter = new SimpleCursorAdapter(this, R.layout.list_item, cursor, new String[]{MyDB.WIN_NAME, "checked"}, new int[]{R.id.listItemLabel, R.id.itemChecked}, CursorAdapter.FLAG_AUTO_REQUERY);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,6 +67,7 @@ public class MyActivity extends Activity {
                         // we do wont let them check it again
                         // the pic should also be different
                         if (adapter.getCursor().getInt(7) > 0) return;
+
 
                         new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Upravo si cekirala aktivnost. Toliko.")
                                 .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
@@ -109,7 +113,9 @@ public class MyActivity extends Activity {
         dailyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                adapter.swapCursor(db.selectRecordsByFreq("daily"));
+                v.setBackgroundColor(0xFFA537FD);
+                weeklyButton.setBackgroundColor(0xFF666);
+                randomButton.setBackgroundColor(0xFF666);
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
 
             }
@@ -117,24 +123,30 @@ public class MyActivity extends Activity {
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                adapter.swapCursor(db.selectRecordsByFreq("weekly"));
+                v.setBackgroundColor(0xFFA537FD);
+                dailyButton.setBackgroundColor(0xFF666);
+                randomButton.setBackgroundColor(0xFF666);
+
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
             }
         });
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                adapter.swapCursor(db.selectRecordsWithCount());
+                v.setBackgroundColor(0xFFA537FD);
+                dailyButton.setBackgroundColor(0xFF666);
+                weeklyButton.setBackgroundColor(0xFF666);
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("random"));
             }
         });
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
-
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
+//
+//    }
 }
+
