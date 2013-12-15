@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.Date;
 
@@ -50,6 +51,7 @@ public class MyDB {
         values.put(WIN_NAME, name);
         values.put(WIN_CAT, category);
         values.put(WIN_CREATED, new Date().toString());
+        Log.i("DB", new Date().toString());
         values.put(WIN_FREQ, freq);
         values.put(WIN_IMP, importance);
         values.put(WIN_F_ARH, false);
@@ -66,7 +68,7 @@ public class MyDB {
     public long archiveEvent(Integer activityId){
         ContentValues values = new ContentValues();
         values.put(WIN_F_ARH, 1);
-        return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId +"", null);
+        return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId + "", null);
     }
 
     public Cursor selectRecords() {
@@ -113,16 +115,37 @@ public class MyDB {
      * has been checked within a week
     * */
     public Cursor selectCheckedRecordsByFreq(String freq) {
-        Cursor mCursor = database.rawQuery("select dw._id,dw.name,dw.category,dw.created, dw.freq, dw.importance, count(e._id) as count1, case when e.created = date('now') then 1 else 0 end  as checked " +
-                " from DailyWin dw left join Event e on e.dailywin_id = dw._id " +
-                " where dw.freq='" + freq + "' " +
-                " and dw.f_arh = 0  ", null);
+        Cursor mCursor = database.rawQuery("select dw._id, dw.name, dw.category, dw.created, dw.freq, dw.importance, count(e._id) as count1, " +
+                                            "      (select count(e1._id) " +
+                                                    "from Event e1  " +
+                                                    "where datetime(e1.created) >= datetime(date('now')) " +
+                                                    " and e1.dailywin_id = dw._id) as checked " +
+                                             "from DailyWin dw left join Event e on e.dailywin_id = dw._id " +
+                                             "where dw.freq='" + freq + "' " +
+                                             "and dw.f_arh = 0 " +
+                                             "group by dw._id " +
+                                             "order by dw._id desc", null);
 
 
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor;
+    }
+
+    public boolean selectIfRecordChecked(int id) {
+        Cursor mCursor = database.rawQuery("select count(e._id) as checked " +
+                "from DailyWin dw, Event e " +
+                "where e.created >= date('now') " +
+                " and dw._id = '"+ id +"' " +
+                " and e.dailywin_id = dw._id  " +
+                " and  dw.f_arh = 0", null);
+
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor.getInt(0)>0;
     }
 
 }
