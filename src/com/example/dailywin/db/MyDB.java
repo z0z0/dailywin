@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -46,10 +48,16 @@ public class MyDB {
 
 
     public long createRecord(String name, String category, String freq, Integer importance) {
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = new Date();
+        String formattedDate= df.format(date);
+
+
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
         values.put(WIN_CAT, category);
-        values.put(WIN_CREATED, new Date().toString());
+        values.put(WIN_CREATED, formattedDate);
         values.put(WIN_FREQ, freq);
         values.put(WIN_IMP, importance);
         values.put(WIN_F_ARH, false);
@@ -57,16 +65,20 @@ public class MyDB {
     }
 
     public long createEvent(Integer dailywinId) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = new Date();
+        String formattedDate = df.format(date);
+
         ContentValues values = new ContentValues();
         values.put(EVN_WIN, dailywinId);
-        values.put(EVN_CREATED, new Date().toString());
+        values.put(EVN_CREATED, formattedDate);
         return database.insert(EVN_TABLE, null, values);
     }
 
     public long archiveEvent(Integer activityId){
         ContentValues values = new ContentValues();
         values.put(WIN_F_ARH, 1);
-        return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId +"", null);
+        return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId + "", null);
     }
 
     public Cursor selectRecords() {
@@ -82,9 +94,9 @@ public class MyDB {
     @Deprecated
     public Cursor selectRecordsWithCount() {
         Cursor mCursor = database.rawQuery("select t1._id,t1.name,t1.category,t1.created, t1.freq, t1.importance, count(t2._id) as count1 " +
-                                          " from DailyWin t1 left join Event t2 on t2.dailywin_id=t1._id " +
-                                          " where t1.f_arh = 0 " +
-                                          "  group by t1._id ", null);
+                " from DailyWin t1 left join Event t2 on t2.dailywin_id=t1._id " +
+                " where t1.f_arh = 0 " +
+                "  group by t1._id ", null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
@@ -113,12 +125,13 @@ public class MyDB {
      * has been checked within a week
     * */
     public Cursor selectCheckedRecordsByFreq(String freq) {
-        Cursor mCursor = database.rawQuery("select dw._id,dw.name,dw.category,dw.created, dw.freq, dw.importance, count(e._id) as count1, case when e.created = date('now') then 1 else 0 end  as checked " +
-                " from DailyWin dw left join Event e on e.dailywin_id = dw._id " +
-                " where dw.freq='" + freq + "' " +
-                " and dw.f_arh = 0  ", null);
-
-
+            Cursor mCursor = database.rawQuery("select dw._id, dw.name, dw.category, dw.created, dw.freq, dw.importance, count(e._id) as count1, "+
+                            "(select count(e1._id) from Event e1  "+
+                            " where e1.created >= strftime('%Y-%m-%d 00:00:00','now','localtime') and e1.dailywin_id = dw._id) as checked "+
+                            "from DailyWin dw left join Event e on e.dailywin_id=dw._id "+
+                            "where dw.freq='" + freq + "' "+
+                            "and dw.f_arh = 0 group by dw._id order by dw._id desc"
+                                    , null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
