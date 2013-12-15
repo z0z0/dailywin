@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+
 import com.example.dailywin.db.MyDB;
 
 public class MyActivity extends Activity {
@@ -59,21 +60,22 @@ public class MyActivity extends Activity {
                 if (swipeDetector.swipeDetected()) {
                     if (swipeDetector.getAction() == SwipeDetector.Action.LR) {
 
-
+                        //this counts how many activities were checked that day, and if it's more than once,
+                        // we do wont let them check it again
+                        // the pic should also be different
+                        if (adapter.getCursor().getInt(7) > 0) return;
 
                         new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Upravo si cekirala aktivnost. Toliko.")
                                 .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Cursor c = adapter.getCursor();
-                                String freq = c.getString(4);
-                                Log.i("MyActivity", freq);
-                                Log.i("DB__________________", c.getString(3));
-                                c.moveToPosition(position);
-                                db.createEvent(c.getInt(0));
-                                adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
-                                dialog.cancel();
-                            }
-                            }).show();
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Cursor c = adapter.getCursor();
+                                        String freq = c.getString(4);
+                                        c.moveToPosition(position);
+                                        db.createEvent(c.getInt(0));
+                                        adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
+                                        dialog.cancel();
+                                    }
+                                }).show();
 
                     }
                     if (swipeDetector.getAction() == SwipeDetector.Action.RL) {

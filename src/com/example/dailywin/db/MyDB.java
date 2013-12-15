@@ -50,14 +50,11 @@ public class MyDB {
     public long createRecord(String name, String category, String freq, Integer importance) {
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date = new Date();
-        String formattedDate= df.format(date);
-
 
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
         values.put(WIN_CAT, category);
-        values.put(WIN_CREATED, formattedDate);
+        values.put(WIN_CREATED, df.format(new Date()));
         values.put(WIN_FREQ, freq);
         values.put(WIN_IMP, importance);
         values.put(WIN_F_ARH, false);
@@ -66,12 +63,9 @@ public class MyDB {
 
     public long createEvent(Integer dailywinId) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date date = new Date();
-        String formattedDate = df.format(date);
-
         ContentValues values = new ContentValues();
         values.put(EVN_WIN, dailywinId);
-        values.put(EVN_CREATED, formattedDate);
+        values.put(EVN_CREATED, df.format(new Date()));
         return database.insert(EVN_TABLE, null, values);
     }
 
