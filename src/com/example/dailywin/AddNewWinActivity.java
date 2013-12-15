@@ -1,6 +1,7 @@
     package com.example.dailywin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -26,8 +27,19 @@ public class AddNewWinActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        String checked = "daily";
+        if(getIntent() != null && getIntent().getExtras() != null){
+           checked = getIntent().getStringExtra("f_freq");
+        }
+
+
+
         super.onCreate(savedInstanceState);
         self = this;
+
+        int resourceId = getResources().getIdentifier(checked, "id", getPackageName());
+
+
         setContentView(R.layout.addnew);
         name = (EditText) findViewById(R.id.editText);
         category = (Spinner) findViewById(R.id.category);
@@ -35,6 +47,7 @@ public class AddNewWinActivity extends Activity {
         saveButton = (Button) findViewById(R.id.saveButton);
         radioGroup = (RadioGroup) findViewById(R.id.radioFrequency);
         radioGroup.getCheckedRadioButtonId();
+        radioGroup.check(resourceId);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         db = new MyDB(this);
 
@@ -44,7 +57,12 @@ public class AddNewWinActivity extends Activity {
                 int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
                 String freq = checkedRadioButtonId == R.id.daily ? "daily" : checkedRadioButtonId == R.id.weekly ? "weekly" : "random";
                 db.createRecord(name.getText().toString(), category.getSelectedItem().toString(), freq, seekBar.getProgress());
-                finish();
+
+                Intent passCategory = new Intent(self, MyActivity.class);
+                passCategory.putExtra("freq_filter", freq);
+                startActivity(passCategory);
+
+               // finish();
             }
         });
 

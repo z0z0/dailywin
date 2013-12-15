@@ -12,6 +12,7 @@ import android.widget.*;
 
 import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
+import com.example.dailywin.gestures.SwipeDetector;
 
 public class MyActivity extends Activity {
 
@@ -28,21 +29,29 @@ public class MyActivity extends Activity {
     private TextView dailyButton;
     private TextView weeklyButton;
     private TextView randomButton;
-
+    String frequency = "daily";
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        if(getIntent() != null && getIntent().getExtras() != null){
+            frequency = getIntent().getStringExtra("freq_filter");
+        }
 
         super.onCreate(savedInstanceState);
         self = this;
         setContentView(R.layout.main);
         addActivityButton = (Button) findViewById(R.id.addActivity);
-        dailyButton = (TextView) findViewById(R.id.dailyButton);
-        dailyButton.setBackgroundColor(0xFFA537FD);
+
+        int resourceId = getResources().getIdentifier(frequency+"Button", "id", getPackageName());
+
+        TextView btn = (TextView) findViewById(resourceId);
+        btn.setBackgroundColor(0xFFA537FD);
 
         addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(self, AddNewWinActivity.class);
+                intent.putExtra("f_freq", frequency);
                 startActivity(intent);
             }
         });
@@ -58,7 +67,7 @@ public class MyActivity extends Activity {
 
         db = new MyDB(this);
 //        Cursor cursor = db.selectRecordsWithCount();
-        Cursor cursor = db.selectCheckedRecordsByFreq("daily");
+        Cursor cursor = db.selectCheckedRecordsByFreq(frequency);
         listView = (ListView) findViewById(R.id.listView);
 
         final SwipeDetector swipeDetector = new SwipeDetector();
@@ -117,7 +126,6 @@ public class MyActivity extends Activity {
 
         listView.setAdapter(adapter);
 
-
         dailyButton = (TextView) findViewById(R.id.dailyButton);
         weeklyButton = (TextView) findViewById(R.id.weeklyButton);
         randomButton = (TextView) findViewById(R.id.randomButton);
@@ -127,7 +135,9 @@ public class MyActivity extends Activity {
                 v.setBackgroundColor(0xFFA537FD);
                 weeklyButton.setBackgroundColor(0xFF666);
                 randomButton.setBackgroundColor(0xFF666);
+
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
+                frequency = "daily";
 
             }
         });
@@ -139,6 +149,7 @@ public class MyActivity extends Activity {
                 randomButton.setBackgroundColor(0xFF666);
 
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
+                frequency = "weekly";
             }
         });
         randomButton.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +158,9 @@ public class MyActivity extends Activity {
                 v.setBackgroundColor(0xFFA537FD);
                 dailyButton.setBackgroundColor(0xFF666);
                 weeklyButton.setBackgroundColor(0xFF666);
+
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("random"));
+                frequency = "random";
             }
         });
     }

@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:background="#c0c0c0">
+              android:layout_height="wrap_content">
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -50,7 +49,7 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
         android:baselineAligned="false"
         android:layout_marginBottom="-7dp">
         <TextView
@@ -88,7 +87,8 @@
             android:gravity="center"
             android:textStyle="bold"
             android:paddingTop="7dp"
-            android:paddingBottom="7dp" />
+            android:paddingBottom="7dp"
+            android:autoText="false" />
     </LinearLayout>
     <ListView
             android:layout_width="fill_parent"

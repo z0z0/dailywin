@@ -1,4 +1,4 @@
-package com.example.dailywin;
+package com.example.dailywin.gestures;
 
 import android.view.MotionEvent;
 import android.view.View;
