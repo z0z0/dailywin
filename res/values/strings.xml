@@ -6,11 +6,4 @@
     <string name="textSettings">SETTINGS</string>
     <string name="profile">PROFILE</string>
     <string name="historyHeader">YOUR HISTORY OF NAILING IT</string>
-    <string-array name="category_array">
-        <item>Work</item>
-        <item>Health</item>
-        <item>Love</item>
-        <item>Pleasure</item>
-        <item>Social</item>
-    </string-array>
 </resources>

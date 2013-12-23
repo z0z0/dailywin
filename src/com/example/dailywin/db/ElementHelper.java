@@ -15,7 +15,7 @@ public class ElementHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "DBName";
     private static final int DATABASE_VERSION = 6;
-    private static final String DATABASE_CREATE_TABLE1 = "create table DailyWin ( _id integer primary key,name text not null,category text not null,created DATETIME not null, freq text not null, importance integer not null, f_arh int not null);";
+    private static final String DATABASE_CREATE_TABLE1 = "create table DailyWin ( _id integer primary key, name text not null, category text, created DATETIME not null, freq text not null, importance integer not null, f_arh int not null);";
     private static final String DATABASE_CREATE_TABLE2 = "create table Event ( _id integer primary key,created DATETIME not null, dailywin_id integer not null);";
 
     public ElementHelper(Context context) {

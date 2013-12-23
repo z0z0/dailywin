@@ -117,6 +117,10 @@ public class MyActivity extends Activity {
                                 }).show();
                     }
                     adapter.notifyDataSetChanged();
+                    return;
+                }
+                if (swipeDetector.getAction() == SwipeDetector.Action.None)  {
+                    new AlertDialog.Builder(self).setTitle("Mesaž").setMessage("edit").show();
 
                 }
             }

@@ -18,10 +18,10 @@ public class SwipeDetector implements View.OnTouchListener {
         None // Action not found
     }
 
-    private static final int HORIZONTAL_MIN_DISTANCE = 30; // The minimum
+    private static final int HORIZONTAL_MIN_DISTANCE = 275; // The minimum
     // distance for
     // horizontal swipe
-    private static final int VERTICAL_MIN_DISTANCE = 80; // The minimum distance
+    private static final int VERTICAL_MIN_DISTANCE = 110; // The minimum distance
     // for vertical
     // swipe
     private float downX, downY, upX, upY; // Coordinates
@@ -45,7 +45,7 @@ public class SwipeDetector implements View.OnTouchListener {
                 downX = event.getX();
                 downY = event.getY();
                 mSwipeDetected = Action.None;
-                return false; // allow other events like Click to be processed
+                return true; // allow other events like Click to be processed
             }
             case MotionEvent.ACTION_MOVE:
             {
@@ -63,7 +63,7 @@ public class SwipeDetector implements View.OnTouchListener {
                         mSwipeDetected = Action.LR;
                         return true;
                     }
-                    if (deltaX > 0) {
+                    if (deltaX > 0 ) {
 
                         mSwipeDetected = Action.RL;
                         return true;

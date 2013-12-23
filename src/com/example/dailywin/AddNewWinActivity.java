@@ -18,7 +18,6 @@ public class AddNewWinActivity extends Activity {
 
     private AddNewWinActivity self;
     private Button saveButton;
-    private Spinner category;
     private RadioGroup radioGroup;
     private SeekBar seekBar;
     private EditText name;
@@ -42,8 +41,6 @@ public class AddNewWinActivity extends Activity {
 
         setContentView(R.layout.addnew);
         name = (EditText) findViewById(R.id.editText);
-        category = (Spinner) findViewById(R.id.category);
-        category.setAdapter(ArrayAdapter.createFromResource(this, R.array.category_array, android.R.layout.simple_spinner_item));
         saveButton = (Button) findViewById(R.id.saveButton);
         radioGroup = (RadioGroup) findViewById(R.id.radioFrequency);
         radioGroup.getCheckedRadioButtonId();
@@ -56,7 +53,7 @@ public class AddNewWinActivity extends Activity {
             public void onClick(View v) {
                 int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
                 String freq = checkedRadioButtonId == R.id.daily ? "daily" : checkedRadioButtonId == R.id.weekly ? "weekly" : "random";
-                db.createRecord(name.getText().toString(), category.getSelectedItem().toString(), freq, seekBar.getProgress());
+                db.createRecord(name.getText().toString(), null, freq, seekBar.getProgress());
 
                 Intent passCategory = new Intent(self, MyActivity.class);
                 passCategory.putExtra("freq_filter", freq);
