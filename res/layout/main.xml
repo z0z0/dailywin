@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content">
+              android:background="#BDAEC6"
+              android:layout_height="match_parent">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -42,8 +43,8 @@
             android:longClickable="false"
             android:textColor="#fff"
             android:layout_marginRight="0dp"
-            android:background="#b0b0b0"
-            android:shadowColor="#666"
+            android:background="#421C52"
+            android:shadowColor="#b0d"
             android:singleLine="false"
             android:textStyle="bold" />
     </LinearLayout>
@@ -59,6 +60,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="Daily"
+            android:textColor="#fff"
             android:id="@+id/dailyButton"
             android:layout_weight="1"
             android:layout_margin="0dp"
@@ -73,6 +75,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="Weekly"
+            android:textColor="#fff"
             android:id="@+id/weeklyButton"
             android:layout_weight="1"
             android:clickable="true"
@@ -89,6 +92,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="Random"
+            android:textColor="#fff"
             android:id="@+id/randomButton"
             android:layout_weight="1"
             android:layout_gravity="center"

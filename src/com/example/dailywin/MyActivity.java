@@ -45,7 +45,7 @@ public class MyActivity extends Activity {
         int resourceId = getResources().getIdentifier(frequency+"Button", "id", getPackageName());
 
         TextView btn = (TextView) findViewById(resourceId);
-        btn.setBackgroundColor(0xFFA537FD);
+        btn.setBackgroundColor(0xFF421C52);
 
         addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,7 @@ public class MyActivity extends Activity {
                         if (adapter.getCursor().getInt(7) > 0) return;
 
 
-                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Upravo si cekirala aktivnost. Toliko.")
+                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Nailed it! :-)")
                                 .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Cursor c = adapter.getCursor();
@@ -120,8 +120,19 @@ public class MyActivity extends Activity {
                     return;
                 }
                 if (swipeDetector.getAction() == SwipeDetector.Action.None)  {
-                    new AlertDialog.Builder(self).setTitle("Mesaž").setMessage("edit").show();
+                    Cursor c = adapter.getCursor();
+                    String activity_id = c.getString(0);
+                    String activity_name = c.getString(1);
+                    String freq = c.getString(4);
+                    String importance = c.getString(5);
 
+                    //new AlertDialog.Builder(self).setTitle("Mesaž").setMessage("edit").show();
+                    Intent Edit = new Intent(self, Edit.class);
+                    Edit.putExtra("activity_id", activity_id);
+                    Edit.putExtra("activity_name", activity_name);
+                    Edit.putExtra("activity_freq", freq);
+                    Edit.putExtra("activity_importance", importance);
+                    startActivity(Edit);
                 }
             }
         });
@@ -134,7 +145,7 @@ public class MyActivity extends Activity {
         dailyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.setBackgroundColor(0xFFA537FD);
+                v.setBackgroundColor(0xFF421C52);
                 weeklyButton.setBackgroundColor(0xFF666);
                 randomButton.setBackgroundColor(0xFF666);
 

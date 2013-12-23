@@ -1,62 +1,70 @@
-    package com.example.dailywin;
+package com.example.dailywin;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
+
 import com.example.dailywin.db.MyDB;
 
 /**
- * Created with IntelliJ IDEA.
- * User: gimlet
- * Date: 11/16/13
- * Time: 5:16 PM
- * To change this template use File | Settings | File Templates.
+ * Created by Uros on 23.12.13..
  */
-public class AddNewWinActivity extends Activity {
+public class Edit extends Activity {
 
-    private AddNewWinActivity self;
+    private Edit self;
     private Button saveButton;
     private RadioGroup radioGroup;
     private SeekBar seekBar;
     private EditText name;
     private MyDB db;
+    private String activity_id = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        String checked = "daily";
+        String activity_name = "", activity_freq = "", activity_importance = "";
         if(getIntent() != null && getIntent().getExtras() != null){
-           checked = getIntent().getStringExtra("f_freq");
+            activity_id = getIntent().getStringExtra("activity_id");
+            activity_name = getIntent().getStringExtra("activity_name");
+            activity_freq = getIntent().getStringExtra("activity_freq");
+            activity_importance = getIntent().getStringExtra("activity_importance");
         }
 
         super.onCreate(savedInstanceState);
         self = this;
+        int resourceId = getResources().getIdentifier(activity_freq, "id", getPackageName());
 
-        int resourceId = getResources().getIdentifier(checked, "id", getPackageName());
-
-        setContentView(R.layout.addnew);
+        setContentView(R.layout.edit);
         name = (EditText) findViewById(R.id.editText);
+        name.setText(activity_name);
         saveButton = (Button) findViewById(R.id.saveButton);
         radioGroup = (RadioGroup) findViewById(R.id.radioFrequency);
         radioGroup.getCheckedRadioButtonId();
         radioGroup.check(resourceId);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setProgress(Integer.parseInt(activity_importance));
         db = new MyDB(this);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+
                 String freq = checkedRadioButtonId == R.id.daily ? "daily" : checkedRadioButtonId == R.id.weekly ? "weekly" : "random";
-                db.createRecord(name.getText().toString(), null, freq, seekBar.getProgress());
+                db.updateRecord(Integer.parseInt(activity_id), name.getText().toString(), null, freq, seekBar.getProgress());
 
                 Intent passCategory = new Intent(self, MyActivity.class);
                 passCategory.putExtra("freq_filter", freq);
                 startActivity(passCategory);
+                // finish();
             }
         });
 
     }
 
 }
+

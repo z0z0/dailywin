@@ -61,6 +61,17 @@ public class MyDB {
         return database.insert(WIN_TABLE, null, values);
     }
 
+    public long updateRecord(Integer activity_id, String name, String category, String freq, Integer importance){
+
+        ContentValues values = new ContentValues();
+        values.put(WIN_NAME, name);
+      //  values.put(WIN_CAT, category);
+        values.put(WIN_FREQ, freq);
+        values.put(WIN_IMP, importance);
+        return database.update(WIN_TABLE, values, WIN_ID + "= " + activity_id +"", null);
+
+    }
+
     public long createEvent(Integer dailywinId) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         ContentValues values = new ContentValues();
