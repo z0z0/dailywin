@@ -3,6 +3,8 @@
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
 import com.example.dailywin.db.MyDB;
@@ -25,6 +27,7 @@ public class AddNewWinActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+   //     name.addTextChangedListener(this);
         String checked = "daily";
         if(getIntent() != null && getIntent().getExtras() != null){
            checked = getIntent().getStringExtra("f_freq");
@@ -47,6 +50,11 @@ public class AddNewWinActivity extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if( name.getText().toString().trim().length() == 0 ) {
+                    name.setError( "Name is required!" );
+                    return;
+                }
+
                 int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
                 String freq = checkedRadioButtonId == R.id.daily ? "daily" : checkedRadioButtonId == R.id.weekly ? "weekly" : "random";
                 db.createRecord(name.getText().toString(), null, freq, seekBar.getProgress());
@@ -58,5 +66,6 @@ public class AddNewWinActivity extends Activity {
         });
 
     }
+
 
 }

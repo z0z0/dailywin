@@ -6,14 +6,29 @@
               android:layout_height="match_parent"
               android:background="#BDAEC6">
 
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:clickable="false"
+        android:gravity="bottom">
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Activity"
             android:id="@+id/textView" android:layout_gravity="center" android:textColor="@color/text"
             android:textSize="18dp"/>
-    <LinearLayout android:background="#BDAEC6"
+  
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="save"
+            android:id="@+id/saveButton"
+            android:layout_gravity="center|bottom"
+            android:layout_margin="15dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="27dp" />
+        </LinearLayout>
+    <LinearLayout android:background="@android:drawable/dialog_holo_light_frame"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" android:layout_gravity="left|center_vertical"
@@ -40,7 +55,7 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="108dp" android:layout_gravity="center"
-            android:background="#BDAEC6" android:layout_margin="5dp">
+            android:background="@android:drawable/dialog_holo_light_frame" android:layout_margin="5dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -91,11 +106,5 @@
                 android:id="@+id/seekBar" android:layout_gravity="center" android:max="100" android:layout_margin="5dp"
             android:background="#BDAEC6" />
     </LinearLayout>
-    <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="save"
-            android:id="@+id/saveButton"
-        android:layout_gravity="center|bottom"
-            android:layout_margin="15dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="27dp" />
+
 </LinearLayout>
