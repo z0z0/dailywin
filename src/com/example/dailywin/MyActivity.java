@@ -157,7 +157,7 @@ public class MyActivity extends Activity {
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.setBackgroundColor(0xFFA537FD);
+                v.setBackgroundColor(0xFF421C52);
                 dailyButton.setBackgroundColor(0xFF666);
                 randomButton.setBackgroundColor(0xFF666);
 
@@ -168,7 +168,7 @@ public class MyActivity extends Activity {
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.setBackgroundColor(0xFFA537FD);
+                v.setBackgroundColor(0xFF421C52);
                 dailyButton.setBackgroundColor(0xFF666);
                 weeklyButton.setBackgroundColor(0xFF666);
 

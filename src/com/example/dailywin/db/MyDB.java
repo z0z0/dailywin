@@ -53,7 +53,7 @@ public class MyDB {
 
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
-        values.put(WIN_CAT, category);
+        values.put(WIN_CAT, "");
         values.put(WIN_CREATED, df.format(new Date()));
         values.put(WIN_FREQ, freq);
         values.put(WIN_IMP, importance);
