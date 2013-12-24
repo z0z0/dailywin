@@ -31,10 +31,49 @@ public class MyDB {
     public final static String WIN_IMP = "importance";  // importance 0-100
     public final static String WIN_F_ARH = "f_arh"; //
 
+
     public final static String EVN_TABLE = "Event"; // name of table
+
     public final static String EVN_WIN = "dailywin_id";  // id of daily win
     public final static String EVN_ID = "_id"; // id value
     public final static String EVN_CREATED = "created";  // timestamp when daily win is checked
+
+
+
+    public final static String BADGE_TABLE = "Badge"; // name of table
+
+    public final static String BAGDE_ID = "_id";  // id of badge
+    public final static String BADGE_NAME = "name"; // name of the badge
+    public final static String BADGE_TRIGGER = "trigger";  // number of times checked when the badge gets activated
+    public final static String BADGE_TYPE = "badge_type_id"; // id of badge type
+    public final static String BADGE_ICON_URL = "icon_url"; // id of badge type
+    public final static String BADGE_TEXT = "text"; // id of badge type
+
+
+
+    public final static String BADGE_TYPE_TABLE = "BadgeType"; // name of table
+
+    public final static String BAGDE_TYPE_ID = "_id";  // id of badge type
+    public final static String BADGE_TYPE_NAME = "name"; // name of the badge type
+
+
+
+    public final static String USR_BADGE = "UserBadge"; // name of table
+
+    public final static String USR_BADGE_ID = "_id";  // id
+    public final static String USR_BADGE_BADGE_ID = "badge_id"; // badge_id
+    public final static String USR_BADGE_TMPSTMP = "timestamp"; // time
+
+
+    public final static String BR_BAD_MESSAGES_TABLE = "BreakingBadMessages"; // name of table
+
+    public final static String BR_BAD_ID = "_id";  // id
+    public final static String BR_BAD_TEXT= "text"; // message text
+    public final static String BR_BAD_WMY = "week_month"; // this week, this month
+    public final static String BR_BAD_DWR = "d_w_r"; // daily/weekly/random
+    public final static String BR_BAD_IMPORTANCE = "importance_range"; // importance range
+    public final static String BR_BAD_HOURS = "hours_range"; // AM/PM
+
 
 
 
