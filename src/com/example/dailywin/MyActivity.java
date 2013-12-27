@@ -14,10 +14,29 @@ import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
 import com.example.dailywin.gestures.SwipeDetector;
 
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 public class MyActivity extends Activity {
 
     private Button addActivityButton;
     private ImageView profileImageView;
+    public static Map<Integer, String> messageMap = new HashMap<Integer, String>();
+    Random random = new Random();
+    private static final int MIN_RANGE=1;
+    private static final int MAX_RANGE=6;
+
+    static {
+
+        messageMap.put(1, "Nailed it!");
+        messageMap.put(2, "Rocked it today!");
+        messageMap.put(3, "Wow. Impressive.");
+        messageMap.put(4, "Little things matter!");
+        messageMap.put(5, "Nicely done!");
+        messageMap.put(6, "Plain awesome.");
+    }
 
     /**
      * Called when the activity is first created.
@@ -30,10 +49,12 @@ public class MyActivity extends Activity {
     private TextView weeklyButton;
     private TextView randomButton;
     String frequency = "daily";
+    private int randomNum;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        if(getIntent() != null && getIntent().getExtras() != null){
+        if (getIntent() != null && getIntent().getExtras() != null) {
             frequency = getIntent().getStringExtra("freq_filter");
         }
 
@@ -42,7 +63,7 @@ public class MyActivity extends Activity {
         setContentView(R.layout.main);
         addActivityButton = (Button) findViewById(R.id.addActivity);
 
-        int resourceId = getResources().getIdentifier(frequency+"Button", "id", getPackageName());
+        int resourceId = getResources().getIdentifier(frequency + "Button", "id", getPackageName());
 
         TextView btn = (TextView) findViewById(resourceId);
         btn.setBackgroundColor(0xFF421C52);
@@ -86,7 +107,7 @@ public class MyActivity extends Activity {
                         if (adapter.getCursor().getInt(7) > 0) return;
 
 
-                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Nailed it! :-)")
+                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage(getMessage(MIN_RANGE,MAX_RANGE)+" "+randomNum)
                                 .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Cursor c = adapter.getCursor();
@@ -119,7 +140,7 @@ public class MyActivity extends Activity {
                     adapter.notifyDataSetChanged();
                     return;
                 }
-                if (swipeDetector.getAction() == SwipeDetector.Action.None)  {
+                if (swipeDetector.getAction() == SwipeDetector.Action.None) {
                     Cursor c = adapter.getCursor();
                     String activity_id = c.getString(0);
                     String activity_name = c.getString(1);
@@ -176,6 +197,13 @@ public class MyActivity extends Activity {
                 frequency = "random";
             }
         });
+    }
+
+
+    private String getMessage(int min, int max) {
+        randomNum = random.nextInt((max - min) + 1) + min;
+        return messageMap.get(randomNum);
+
     }
 
 
