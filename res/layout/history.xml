@@ -8,22 +8,23 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left|center_vertical"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical|left"
         android:background="#c0c0c0"
-        android:clickable="false">
+        android:clickable="false"
+        android:textAlignment="center">
 
 
         <TextView
-            android:layout_width="248dp"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:textColor="#421C52"
+            android:layout_height="fill_parent"
             android:id="@+id/historyHeader"
             android:text="@string/historyHeader"
             android:gravity="center|center_vertical"
             android:autoText="false"
             android:inputType="none"
-            android:textStyle="bold"
-            android:typeface="monospace" />
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -35,13 +36,6 @@
 
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="fill_parent"
