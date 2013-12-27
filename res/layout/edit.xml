@@ -7,12 +7,34 @@
     android:background="#BDAEC6">
 
 
-    <TextView
+
+    <RelativeLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Activity"
-        android:id="@+id/textView" android:layout_gravity="center" android:textColor="@color/text"
-        android:textSize="27dp"/>
+        android:layout_gravity="right|center_vertical"
+        android:clickable="false"
+        android:gravity="bottom">
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+
+            android:textColor="#fff"
+            android:background="#421C52"
+            android:id="@+id/deleteButton"
+            android:layout_margin="10dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="22dp" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Save"
+            android:textColor="#fff"
+            android:background="#421C52"
+            android:id="@+id/saveButton"
+            android:layout_margin="10dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="22dp" />
+    </RelativeLayout>
     <LinearLayout android:background="@android:drawable/dialog_holo_light_frame"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -91,11 +113,5 @@
             android:id="@+id/seekBar" android:layout_gravity="center" android:max="100" android:layout_margin="5dp"
             android:background="@android:color/background_light" />
     </LinearLayout>
-    <Button
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="save"
-        android:id="@+id/saveButton"
-        android:layout_gravity="center|bottom"
-        android:layout_margin="15dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="27dp" />
+
 </LinearLayout>
