@@ -4,22 +4,26 @@
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="wrap_content" android:layout_gravity="center"
-              android:background="#80f"
-    >
+              android:background="#732c7b"
+    android:paddingBottom="5dp">
 
     <ImageView
         android:id="@+id/list_image"
         android:layout_width="50dip"
         android:layout_height="50dip"
         android:layout_gravity="center_vertical"
-       />
-    <TextView android:id="@+id/listItemLabel" android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textColor="@color/text" android:gravity="center" android:width="0dp" android:layout_weight="0.6"
-              android:layout_marginLeft="15dp"
-        android:textSize="@dimen/listItemTextSize"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:singleLine="true" />
+        android:layout_marginTop="5dp" />
+    <TextView android:id="@+id/listItemLabel"
+        android:layout_height="fill_parent"
+        android:textColor="#c3c3e5"
+        android:maxLength="55"
+        android:gravity="center|left"
+        android:width="0dp"
+        android:layout_weight="0.6"
+        android:layout_marginLeft="5dp"
+        android:textSize="22dp"
+        android:maxLines="2"
+        android:layout_width="0dp" />
 
 
     <TextView android:id="@+id/itemChecked" android:layout_width="wrap_content" android:layout_height="fill_parent"

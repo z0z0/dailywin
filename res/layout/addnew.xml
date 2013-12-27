@@ -13,15 +13,6 @@
         android:layout_gravity="right|center_vertical"
         android:clickable="false"
         android:gravity="bottom">
-       <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:textColor="#fff"
-            android:background="#421C52"
-            android:id="@+id/deleteButton"
-            android:layout_margin="10dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="22dp" />
-
         <Button
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -42,6 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
+                android:maxLength="55"
                 android:id="@+id/textView1" android:singleLine="false" android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp" android:textColor="@color/text" android:layout_gravity="center"/>
         <EditText

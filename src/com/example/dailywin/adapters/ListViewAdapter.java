@@ -40,7 +40,7 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         TextView labela = (TextView) rowView.findViewById(R.id.listItemLabel);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
         labela.setText(c.getString(1));
-        // Change the icon for Windows and iPhone
+        // Change the icon
         int s = c.getInt(7);
         if (s == 1) {
             imageView.setImageResource(R.drawable.checked);
