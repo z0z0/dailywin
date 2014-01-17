@@ -9,11 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-
 import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
 import com.example.dailywin.gestures.SwipeDetector;
-
 
 import java.util.HashMap;
 import java.util.Map;
