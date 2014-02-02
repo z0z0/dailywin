@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">dailywin</string>
+    <string name="app_name">Nail It!</string>
     <string name="historyText">HISTORY</string>
     <string name="badgesText">BAGDES</string>
     <string name="textSettings">SETTINGS</string>
     <string name="profile">PROFILE</string>
     <string name="historyHeader">YOUR HISTORY OF NAILING IT AKA NAILSTORY™</string>
+    <string name="saveBtn">Save</string>
+    <string name="deleteBtn">Delete</string>
+    <string name="app_title">NAILITAPP XOXO</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="random">Random</string>
+    <string name="importance">Importance</string>
+    <string name="frequency">Frequency</string>
+    <string name="pa_name">Name</string>
 </resources>

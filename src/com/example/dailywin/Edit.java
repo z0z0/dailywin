@@ -89,8 +89,5 @@ public class Edit extends Activity {
                         }).show();
             }
         });
-
     }
-
 }
-

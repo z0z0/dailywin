@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#BDAEC6">
-
-
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" style="@style/general_layout">
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -16,24 +9,17 @@
         android:clickable="false"
         android:gravity="bottom">
         <Button
+            style="@style/buttons"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-
-            android:textColor="#fff"
-            android:background="#421C52"
+            android:text="@string/deleteBtn"
             android:id="@+id/deleteButton"
-            android:layout_margin="10dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="22dp" />
-
+        />
         <Button
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            style="@style/buttons"
             android:layout_alignParentRight="true"
-            android:text="Save"
-            android:textColor="#fff"
-            android:background="#421C52"
+            android:text="@string/saveBtn"
             android:id="@+id/saveButton"
-            android:layout_margin="10dp" android:minHeight="50dp" android:maxWidth="100dp" android:textSize="22dp" />
+        />
     </RelativeLayout>
     <LinearLayout android:background="@android:drawable/dialog_holo_light_frame"
         android:orientation="horizontal"
@@ -42,59 +28,43 @@
         android:layout_margin="5dp"
         android:longClickable="false">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:id="@+id/textView1" android:singleLine="false" android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" android:textColor="@color/text" android:layout_gravity="center"/>
+            style="@style/txtView"
+            android:text="@string/pa_name"
+            android:id="@+id/textView1"
+        />
         <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText" android:layout_margin="3dp" android:textColor="@color/text"
-            android:layout_gravity="center"
-            android:textAppearance="@color/text"
-            android:singleLine="false"
-            android:textSize="25dp"
-            android:textStyle="normal"
-            android:typeface="monospace" />
+            style="@style/editTxt"
+            android:id="@+id/editText"
+         />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="108dp" android:layout_gravity="center"
+        android:layout_height="wrap_content" android:layout_gravity="center"
         android:background="@android:drawable/dialog_holo_light_frame" android:layout_margin="5dp">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Frequency"
-            android:id="@+id/textView3" android:layout_gravity="center_vertical|left" android:textColor="@color/text"
-            android:layout_margin="5dp"/>
+            style="@style/txtView"
+            android:text="@string/frequency"
+            android:id="@+id/textView3"
+        />
         <RadioGroup
             android:id="@+id/radioFrequency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            style="@style/radio_grp">
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Random"
-                android:id="@+id/random" android:layout_gravity="left|center_vertical" android:textColor="#010101"
-                android:textSize="15dp" />
+                style="@style/radio_btns"
+                android:text="@string/random"
+                android:id="@+id/random"
+            />
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/radio_btns"
                 android:id="@+id/daily"
-                android:text="Daily"
-                android:textColor="#010101"
-                android:textSize="15dp" />
+                android:text="@string/daily"
+            />
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Weekly"
-                android:id="@+id/weekly" android:layout_gravity="left|center_vertical" android:textColor="#010101"
-                android:textSize="15dp"
-                android:typeface="monospace" />
+                style="@style/radio_btns"
+                android:text="@string/weekly"
+                android:id="@+id/weekly"
+            />
         </RadioGroup>
     </LinearLayout>
     <LinearLayout
@@ -103,15 +73,14 @@
         android:layout_height="wrap_content" android:layout_gravity="center" android:layout_margin="5dp"
         android:background="@android:drawable/dialog_holo_light_frame">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Importance"
-            android:id="@+id/textView4" android:textColor="@color/text" android:layout_margin="5dp"/>
+            style="@style/txtView"
+            android:text="@string/importance"
+            android:id="@+id/textView4"
+        />
         <SeekBar
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar" android:layout_gravity="center" android:max="100" android:layout_margin="5dp"
-            android:background="@android:color/background_light" />
+            style="@style/seekBar"
+            android:id="@+id/seekBar"
+        />
     </LinearLayout>
 
 </LinearLayout>
