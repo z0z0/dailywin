@@ -4,9 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -208,6 +209,43 @@ public class MyDB {
             mCursor.moveToFirst();
         }
         return mCursor;
+    }
+
+
+    public long consecutiveDailyCount (long dailyWinId, String date, long count) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            cal.setTime(sdf.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cal.add(Calendar.DATE, -1);
+        String d = sdf.format(cal.getTime());
+        long c = count;
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@ prosledjeno "+c);
+        if (existsActivityOnDate(dailyWinId,d)) {
+            c++;
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@ "+c);
+            consecutiveDailyCount(dailyWinId, d, c);
+        }
+        return c;
+    }
+
+    private boolean existsActivityOnDate (long dailyWinId, String date) {
+        Cursor mCursor = database.rawQuery("select count(e._id)" +
+                "from Event e " +
+                "where e.created >= strftime('%Y-%m-%d 00:00:00','"+date+"','localtime') " +
+                "and e.created <= strftime('%Y-%m-%d 23:59:59','"+date+"','localtime') " +
+                " and e.dailywin_id = "+dailyWinId+" " , null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor.getInt(0)>0;
+
+
     }
 
 }

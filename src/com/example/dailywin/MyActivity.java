@@ -13,6 +13,8 @@ import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
 import com.example.dailywin.gestures.SwipeDetector;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -48,6 +50,7 @@ public class MyActivity extends Activity {
     private TextView randomButton;
     String frequency = "daily";
     private int randomNum;
+    private long consecutiveCount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,8 +88,9 @@ public class MyActivity extends Activity {
         });
 
         db = new MyDB(this);
-//        Cursor cursor = db.selectRecordsWithCount();
         Cursor cursor = db.selectCheckedRecordsByFreq(frequency);
+
+//        Cursor cursor = db.selectRecordsWithCount();
         listView = (ListView) findViewById(R.id.listView);
 
         final SwipeDetector swipeDetector = new SwipeDetector();
@@ -104,16 +108,24 @@ public class MyActivity extends Activity {
                         // the pic should also be different
                         if (adapter.getCursor().getInt(7) > 0) return;
 
+                        Cursor c = adapter.getCursor();
+                        String freq = c.getString(4);
+                        c.moveToPosition(position);
+                        int dailyWinId = c.getInt(0);
+                        db.createEvent(dailyWinId);
 
-                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage(getMessage(MIN_RANGE,MAX_RANGE)+" "+randomNum)
+                        //calculate consecutive days
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        consecutiveCount = db.consecutiveDailyCount(dailyWinId,sdf.format(new Date()),0);
+                        System.out.println("consecutive count " + db.consecutiveDailyCount(dailyWinId,sdf.format(new Date()),0));
+                        adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
+
+
+
+                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage(getMessage(MIN_RANGE,MAX_RANGE)+" "+consecutiveCount)
                                 .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Cursor c = adapter.getCursor();
-                                        String freq = c.getString(4);
-                                        c.moveToPosition(position);
-                                        db.createEvent(c.getInt(0));
-                                        adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
-                                        dialog.cancel();
+                                       dialog.cancel();
                                     }
                                 }).show();
 
@@ -128,7 +140,7 @@ public class MyActivity extends Activity {
                         c.moveToPosition(position);
                         db.archiveEvent(c.getInt(0));
                         adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
-                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage("Maće maće ")
+                        new AlertDialog.Builder(self).setMessage("Crap! You deleted one. Douche.")
                                 .setPositiveButton("M'kay", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.cancel();
