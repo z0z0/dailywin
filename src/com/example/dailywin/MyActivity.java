@@ -13,8 +13,6 @@ import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
 import com.example.dailywin.gestures.SwipeDetector;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -115,9 +113,8 @@ public class MyActivity extends Activity {
                         db.createEvent(dailyWinId);
 
                         //calculate consecutive days
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        consecutiveCount = db.consecutiveDailyCount(dailyWinId,sdf.format(new Date()),0);
-                        System.out.println("consecutive count " + db.consecutiveDailyCount(dailyWinId,sdf.format(new Date()),0));
+                        consecutiveCount = db.consecutive(dailyWinId);
+                        System.out.println("consecutive count " + consecutiveCount);
                         adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
 
 

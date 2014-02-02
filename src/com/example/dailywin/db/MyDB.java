@@ -21,6 +21,7 @@ public class MyDB {
     private ElementHelper dbHelper;
 
     private SQLiteDatabase database;
+    private int consecutive;
 
     public final static String WIN_TABLE = "DailyWin"; // name of table
 
@@ -212,7 +213,14 @@ public class MyDB {
     }
 
 
-    public long consecutiveDailyCount (long dailyWinId, String date, long count) {
+    public long consecutive (long dailyWinId) {
+        consecutive = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        consecutiveDailyCount(dailyWinId, sdf.format(new Date()), 0) ;
+        return consecutive;
+
+    }
+    private long consecutiveDailyCount (long dailyWinId, String date, long count) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -227,6 +235,7 @@ public class MyDB {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@ prosledjeno "+c);
         if (existsActivityOnDate(dailyWinId,d)) {
             c++;
+            consecutive++;
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@ "+c);
             consecutiveDailyCount(dailyWinId, d, c);
         }
