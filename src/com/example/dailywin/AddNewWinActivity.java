@@ -1,4 +1,4 @@
-    package com.example.dailywin;
+package com.example.dailywin;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import com.example.dailywin.db.MyDB;
 
-    /**
+/**
  * Created with IntelliJ IDEA.
  * User: gimlet
  * Date: 11/16/13
@@ -26,11 +26,14 @@ public class AddNewWinActivity extends Activity {
     private EditText name;
     private MyDB db;
 
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         String checked = "daily";
-        if(getIntent() != null && getIntent().getExtras() != null){
-           checked = getIntent().getStringExtra("f_freq");
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            checked = getIntent().getStringExtra("f_freq");
         }
 
         super.onCreate(savedInstanceState);
@@ -50,8 +53,8 @@ public class AddNewWinActivity extends Activity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( name.getText().toString().trim().length() == 0 ) {
-                    name.setError( "Name is required!" );
+                if (name.getText().toString().trim().length() == 0) {
+                    name.setError("Name is required!");
                     return;
                 }
 
