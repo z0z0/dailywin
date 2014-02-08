@@ -71,6 +71,7 @@ public class ElementHelper extends SQLiteOpenHelper {
         db.execSQL(DATABASE_CREATE_TABLE4);
         db.execSQL(DATABASE_CREATE_TABLE5);
         db.execSQL(DATABASE_CREATE_TABLE6);
+        db.execSQL(TABLE6_INITIAL_INSERT);
     }
 
     @Override
@@ -80,6 +81,7 @@ public class ElementHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Badge");
         db.execSQL("DROP TABLE IF EXISTS BadgeType");
         db.execSQL("DROP TABLE IF EXISTS UserBadge");
+        db.execSQL("DROP TABLE IF EXISTS PlainMessage");
 
         onCreate(db);
     }
