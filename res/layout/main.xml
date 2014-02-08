@@ -14,7 +14,7 @@
             android:id="@+id/profileView"
         />
 
-        <TextView
+        <ImageView
             style="@style/app_title"
             android:id="@+id/editText"
             android:text="@string/app_title"
@@ -53,7 +53,7 @@
     <!--STYLE TBD FOR TEH LIST-->
     <ListView
         android:layout_width="fill_parent"
-        android:background="#BDAEC6"
+        android:background="#DCDDDF"
         android:layout_height="fill_parent"
         android:divider="@android:color/transparent"
         android:dividerHeight="7dp"

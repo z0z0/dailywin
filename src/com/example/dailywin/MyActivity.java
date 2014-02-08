@@ -25,19 +25,9 @@ public class MyActivity extends Activity {
 
     private Button addActivityButton;
     private ImageView profileImageView;
-    public static Map<Integer, String> messageMap = new HashMap<Integer, String>();
     Random random = new Random();
     private static final int MIN_RANGE=1;
     private static final int MAX_RANGE=35;
-
-    static {
-        messageMap.put(1, "Nailed it!");
-        messageMap.put(2, "Rocked it today!");
-        messageMap.put(3, "Wow. Impressive.");
-        messageMap.put(4, "Little things matter!");
-        messageMap.put(5, "Nicely done!");
-        messageMap.put(6, "Plain awesome.");
-    }
 
     /**
      * Called when the activity is first created.
@@ -67,7 +57,8 @@ public class MyActivity extends Activity {
 
         int resourceId = getResources().getIdentifier(frequency + "Button", "id", getPackageName());
         TextView btn = (TextView) findViewById(resourceId);
-        btn.setBackgroundColor(0xFF421C52);
+        btn.setBackgroundColor(0xFFEF3E36);
+        btn.setTextColor(0xFFFFFFFF);
 
         addActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,11 +110,6 @@ public class MyActivity extends Activity {
 
                         Dialog nailedIt = new Dialog(self, R.style.alertDialog);
 
-                        nailedIt.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-                        nailedIt.setContentView(R.layout.nail_dialog);
-
-
                         if (adapter.getCursor().getInt(7) == 0) {
                             db.createEvent(dailyWinId);
                             nailedIt.setTitle("Happy hour! +1");
@@ -131,6 +117,12 @@ public class MyActivity extends Activity {
                         else{
                             nailedIt.setTitle("Znachi ovo je vec cekirano");
                         }
+
+                        nailedIt.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        nailedIt.setContentView(R.layout.nail_dialog);
+
+
 
 
                         nailedIt.setCancelable(true);
@@ -146,13 +138,6 @@ public class MyActivity extends Activity {
 
                         nailedIt.show();
 
-//                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(self, R.style.alertDialog);
-//                        alertDialog.setTitle("Poruka").setMessage(getMessage(MIN_RANGE,MAX_RANGE)+" "+consecutiveCount)
-//                                .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                       dialog.cancel();
-//                                    }
-//                                }).show();
                     }
 
                     if (swipeDetector.getAction() == SwipeDetector.Action.RL) {
@@ -201,7 +186,8 @@ public class MyActivity extends Activity {
         dailyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.setBackgroundColor(0xFF421C52);
+                v.setBackgroundColor(0xFFEF3E36);
+                dailyButton.setTextColor(0xFFFFFFFF);
                 weeklyButton.setBackgroundColor(0xFF666);
                 randomButton.setBackgroundColor(0xFF666);
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
@@ -212,7 +198,8 @@ public class MyActivity extends Activity {
         weeklyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.setBackgroundColor(0xFF421C52);
+                v.setBackgroundColor(0xFFEF3E36);
+                weeklyButton.setTextColor(0xFFFFFFFF);
                 dailyButton.setBackgroundColor(0xFF666);
                 randomButton.setBackgroundColor(0xFF666);
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
@@ -222,9 +209,10 @@ public class MyActivity extends Activity {
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.setBackgroundColor(0xFF421C52);
+                v.setBackgroundColor(0xFFEF3E36);
                 dailyButton.setBackgroundColor(0xFF666);
                 weeklyButton.setBackgroundColor(0xFF666);
+                randomButton.setTextColor(0xFFFFFFFF);
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("random"));
                 frequency = "random";
             }
@@ -233,7 +221,6 @@ public class MyActivity extends Activity {
 
     private String getMessage(int min, int max) {
         randomNum = random.nextInt((max - min) + 1) + min;
-       // return messageMap.get(randomNum);
         return db.getPlainMessage(randomNum);
     }
 }

@@ -38,9 +38,9 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         // Change the icon
         int s = c.getInt(7);
         if (s == 1) {
-            imageView.setImageResource(R.drawable.checked);
+            imageView.setImageResource(R.drawable.nailed_icon);
         } else {
-            imageView.setImageResource(R.drawable.yogaicon);
+            imageView.setImageResource(R.drawable.not_nailed_icon);
         }
         return rowView;
     }
@@ -56,9 +56,9 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         // Change the icon for Windows and iPhone
         int s = c.getInt(7);
         if (s == 1) {
-            imageView.setImageResource(R.drawable.checked);
+            imageView.setImageResource(R.drawable.nailed_icon);
         } else {
-            imageView.setImageResource(R.drawable.yogaicon);
+            imageView.setImageResource(R.drawable.not_nailed_icon);
         }
 
     }

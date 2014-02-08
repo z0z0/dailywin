@@ -5,7 +5,7 @@
         <item name="android:orientation">vertical</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">#BDAEC6</item>
+        <item name="android:background">#DCDDDF</item>
     </style>
     <!--Styles for list items-->
     <style name="activity_list">
@@ -20,7 +20,7 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingBottom">7dp</item>
         <item name="android:paddingTop">7dp</item>
-        <item name="android:textColor">#fff</item>
+        <item name="android:textColor">#B9BABC</item>
         <item name="android:textStyle">bold</item>
         <item name="android:autoText">false</item>
         <!--??    android:layout_margin="0dp"-->
@@ -47,7 +47,7 @@
         <item name="android:longClickable">false</item>
         <item name="android:textColor">#fff</item>
         <item name="android:layout_marginRight">0dp</item>
-        <item name="android:background">#421C52</item>
+        <item name="android:background">#77787C</item>
         <item name="android:shadowColor">#b0d</item>
         <item name="android:singleLine">false</item>
     </style>
@@ -65,6 +65,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:layout_weight">0.6</item>
+        <item name="android:src">@drawable/nailitapp</item>
         <item name="android:autoText">false</item>
         <item name="android:inputType">none</item>
         <item name="android:textStyle">bold</item>
