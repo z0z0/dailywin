@@ -121,7 +121,10 @@ public class MyDB {
     }
 
     public String getPlainMessage(Integer id){
-        Cursor message = database.rawQuery("select text from PlainMessage where id = "+id+"", null);
+        Cursor message = database.rawQuery("select msg from PlainMessage where _id = "+id+"", null);
+        if (message != null) {
+            message.moveToFirst();
+        }
         return message.getString(0);
     }
 

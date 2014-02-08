@@ -20,45 +20,45 @@ public class ElementHelper extends SQLiteOpenHelper {
     private static final String DATABASE_CREATE_TABLE3 = "create table Badge ( _id integer primary key, name text not null, trigger integer not null, badge_type_id integer not null, icon_url text not null, text text not null );";
     private static final String DATABASE_CREATE_TABLE4 = "create table BadgeType ( _id integer primary key, name text not null);";
     private static final String DATABASE_CREATE_TABLE5 = "create table UserBadge ( _id integer primary key, badge_id integer not null, timestamp DATETIME not null);";
-    private static final String DATABASE_CREATE_TABLE6 = "create table PlainMessage ( _id integer primary key, text text not null;";
+    private static final String DATABASE_CREATE_TABLE6 = "create table PlainMessage ( _id integer primary key, msg text not null);";
 
 
-    private static final String TABLE6_INITIAL_INSERT = "INSERT INTO plain_message (text) VALUES " +
-            " ('You nailed it!'), " +
-            " ('Rocked it today!'), " +
-            " ('Wow. Impressive.'), " +
-            " ('Little things matter!'), " +
-            " ('Nicely done!'), " +
-            " ('Score!'), " +
-            " ('Holla!'), " +
-            " ('Woop dee do!'), " +
-            " ('sharp as a witch\"s boob / beek'), " +
-            " ('out of the park! Homerun.'), " +
-            " ('Shazaaaam'), " +
-            " ('Fancy shmancy'), " +
-            " ('You nailed it!'), " +
-            " ('You put lesser beings to shame'), " +
-            " ('Pat yourself on the back for this one.'), " +
-            " ('There are no words to adequately praise this accomplishment.'), " +
-            " ('Giddy Up!'), " +
-            " ('Hells to the yes!'), " +
-            " ('True story.'), " +
-            " ('Challenge accepted.'), " +
-            " ('Freeeeedom!'), " +
-            " ('Here\\'s looking at you, kid.'), " +
-            " ('May the Force be with you.'), " +
-            " ('You talking to me?'), " +
-            " ('Made it, Ma! Top of the world!'), " +
-            " ('I am big! It\\'s the pictures that got small.'), " +
-            " ('Round up the usual suspects.'), " +
-            " ('You\\'re back!'), " +
-            " ('It's alive! It's alive!'), " +
-         //   " ('As God is my witness, I\\'ll never be hungry again.'), " +
-            " ('You brave little soldier! You\\'re too precious for this world!'), " +
-            " ('What are the odds?'), " +
-            " ('Live long and prosper.'), " +
-            " ('Aces high!'), " +
-            " ('You mother would be so proud!');";
+    private static final String TABLE6_INITIAL_INSERT = "INSERT INTO PlainMessage " +
+            " SELECT 1 as _id, 'You nailed it!' as msg " +
+            " UNION SELECT 2, 'Rocked it today!' " +
+            " UNION SELECT 3, 'You nailed it!' " +
+            " UNION SELECT 4, 'Rocked it today!' " +
+            " UNION SELECT 5, 'Wow. Impressive.' " +
+            " UNION SELECT 6, 'Little things matter!' " +
+            " UNION SELECT 7, 'Nicely done!' " +
+            " UNION SELECT 8, 'Score!' " +
+            " UNION SELECT 9, 'Holla!' " +
+            " UNION SELECT 10, 'Woop dee do!' " +
+            " UNION SELECT 11, 'out of the park! Homerun.' " +
+            " UNION SELECT 12, 'Shazaaaam' " +
+            " UNION SELECT 13, 'Fancy shmancy' " +
+            " UNION SELECT 14, 'You nailed it!' " +
+            " UNION SELECT 15, 'You put lesser beings to shame' " +
+            " UNION SELECT 16, 'Pat yourself on the back for this one.' " +
+            " UNION SELECT 17, 'There are no words to adequately praise this accomplishment.' " +
+            " UNION SELECT 18, 'Giddy Up!' " +
+            " UNION SELECT 19, 'Hells to the yes!' " +
+            " UNION SELECT 20, 'True story.' " +
+            " UNION SELECT 21, 'Challenge accepted.' " +
+            " UNION SELECT 22, 'Freeeeedom!' " +
+            " UNION SELECT 23, 'Here''s looking at you, kid.' " +
+            " UNION SELECT 24, 'May the Force be with you.' " +
+            " UNION SELECT 25, 'You talking to me?' " +
+            " UNION SELECT 26, 'Made it, Ma! Top of the world!' " +
+            " UNION SELECT 27, 'I am big! It''s the pictures that got small.' " +
+            " UNION SELECT 28, 'Round up the usual suspects.' " +
+            " UNION SELECT 29, 'You''re back!' " +
+            " UNION SELECT 30, 'It''s alive! It''s alive!' " +
+            " UNION SELECT 31, 'You brave little soldier! You''re too precious for this world!' " +
+            " UNION SELECT 32, 'What are the odds?' " +
+            " UNION SELECT 33, 'Live long and prosper.' " +
+            " UNION SELECT 34, 'Aces high!' " +
+            " UNION SELECT 35, 'Your mother would be so proud!' ";
 
     public ElementHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

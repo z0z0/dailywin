@@ -28,7 +28,7 @@ public class MyActivity extends Activity {
     public static Map<Integer, String> messageMap = new HashMap<Integer, String>();
     Random random = new Random();
     private static final int MIN_RANGE=1;
-    private static final int MAX_RANGE=6;
+    private static final int MAX_RANGE=35;
 
     static {
         messageMap.put(1, "Nailed it!");
