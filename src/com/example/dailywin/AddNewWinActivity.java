@@ -26,13 +26,8 @@ public class AddNewWinActivity extends Activity {
     private EditText name;
     private MyDB db;
 
-
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-   //     name.addTextChangedListener(this);
         String checked = "daily";
         if(getIntent() != null && getIntent().getExtras() != null){
            checked = getIntent().getStringExtra("f_freq");
@@ -71,6 +66,4 @@ public class AddNewWinActivity extends Activity {
         });
 
     }
-
-
 }

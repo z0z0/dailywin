@@ -32,11 +32,6 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         final LayoutInflater inflater = LayoutInflater.from(context);
         View rowView = inflater.inflate(layout, parent, false);
 
-
-//        LayoutInflater inflater = (LayoutInflater) context
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View rowView = inflater.inflate(R.layout.list_item, parent, false);
-
         TextView labela = (TextView) rowView.findViewById(R.id.listItemLabel);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
         labela.setText(c.getString(1));
@@ -47,7 +42,6 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         } else {
             imageView.setImageResource(R.drawable.yogaicon);
         }
-
         return rowView;
     }
 
@@ -57,8 +51,6 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         TextView Labela = (TextView) rowView.findViewById(R.id.listItemLabel);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
         Labela.setText(c.getString(1));
-
-        //name_text.setTextColor(Color.GREEN);
 
         int position = c.getPosition();
         // Change the icon for Windows and iPhone
@@ -70,7 +62,6 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         }
 
     }
-
 
     public void setSelectedPosition(int position) {
         mSelectedPosition = position;

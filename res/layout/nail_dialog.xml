@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:minWidth="300dp"
+    android:layout_height="wrap_content"
+    style="@style/alertDialog"
+    >
+
+    <TextView android:text="Bedj 1" android:id="@+id/t1"
+        android:background="#FFF"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <ImageView android:id="@+id/badgeGlobal"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:scaleType="center"
+        android:background="#FFF"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView android:text="Bedj 2" android:id="@+id/t2"
+        android:background="#FFF"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <ImageView android:id="@+id/badgeConsecutive"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:scaleType="center"
+        android:background="#FFF"
+        android:layout_marginBottom="10dp"
+       />
+
+    <TextView android:text="@+id/plainMessage" android:id="@+id/plainMessage"
+        android:layout_marginBottom="10dp"
+        android:background="#FFF"
+        android:gravity="center"
+        android:layout_width="match_parent" android:layout_height="wrap_content" />
+
+</LinearLayout>

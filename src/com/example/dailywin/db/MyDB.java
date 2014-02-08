@@ -76,9 +76,6 @@ public class MyDB {
     public final static String BR_BAD_IMPORTANCE = "importance_range"; // importance range
     public final static String BR_BAD_HOURS = "hours_range"; // AM/PM
 
-
-
-
     /**
      * @param context
      */
@@ -89,7 +86,6 @@ public class MyDB {
 
 
     public long createRecord(String name, String category, String freq, Integer importance) {
-
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
         ContentValues values = new ContentValues();
@@ -103,14 +99,11 @@ public class MyDB {
     }
 
     public long updateRecord(Integer activity_id, String name, String category, String freq, Integer importance){
-
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
-      //  values.put(WIN_CAT, category);
         values.put(WIN_FREQ, freq);
         values.put(WIN_IMP, importance);
         return database.update(WIN_TABLE, values, WIN_ID + "= " + activity_id +"", null);
-
     }
 
     public long createEvent(Integer dailywinId) {
@@ -125,6 +118,11 @@ public class MyDB {
         ContentValues values = new ContentValues();
         values.put(WIN_F_ARH, 1);
         return database.update(WIN_TABLE, values, WIN_ID + "= " + activityId +"", null);
+    }
+
+    public String getPlainMessage(Integer id){
+        Cursor message = database.rawQuery("select text from PlainMessage where id = "+id+"", null);
+        return message.getString(0);
     }
 
     public Cursor selectRecords() {
@@ -254,7 +252,5 @@ public class MyDB {
         }
         return mCursor.getInt(0)>0;
 
-
     }
-
 }

@@ -25,8 +25,6 @@ public class Profile extends Activity {
     private ImageButton badgesButton;
     private LinearLayout historyLayout;
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

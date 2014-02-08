@@ -2,12 +2,16 @@ package com.example.dailywin;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.*;
 import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
@@ -27,7 +31,6 @@ public class MyActivity extends Activity {
     private static final int MAX_RANGE=6;
 
     static {
-
         messageMap.put(1, "Nailed it!");
         messageMap.put(2, "Rocked it today!");
         messageMap.put(3, "Wow. Impressive.");
@@ -63,7 +66,6 @@ public class MyActivity extends Activity {
         addActivityButton = (Button) findViewById(R.id.addActivity);
 
         int resourceId = getResources().getIdentifier(frequency + "Button", "id", getPackageName());
-
         TextView btn = (TextView) findViewById(resourceId);
         btn.setBackgroundColor(0xFF421C52);
 
@@ -88,7 +90,6 @@ public class MyActivity extends Activity {
         db = new MyDB(this);
         Cursor cursor = db.selectCheckedRecordsByFreq(frequency);
 
-//        Cursor cursor = db.selectRecordsWithCount();
         listView = (ListView) findViewById(R.id.listView);
 
         final SwipeDetector swipeDetector = new SwipeDetector();
@@ -104,30 +105,56 @@ public class MyActivity extends Activity {
                         //this counts how many activities were checked that day, and if it's more than once,
                         // we do wont let them check it again
                         // the pic should also be different
-                        if (adapter.getCursor().getInt(7) > 0) return;
 
                         Cursor c = adapter.getCursor();
                         String freq = c.getString(4);
                         c.moveToPosition(position);
                         int dailyWinId = c.getInt(0);
 
-                        db.createEvent(dailyWinId);
 
                         //calculate consecutive days
                         consecutiveCount = db.consecutive(dailyWinId);
                         System.out.println("consecutive count " + consecutiveCount);
                         adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
 
+                        Dialog nailedIt = new Dialog(self, R.style.alertDialog);
+
+                        nailedIt.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                        nailedIt.setContentView(R.layout.nail_dialog);
 
 
-                        new AlertDialog.Builder(self).setTitle("Poruka").setMessage(getMessage(MIN_RANGE,MAX_RANGE)+" "+consecutiveCount)
-                                .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                       dialog.cancel();
-                                    }
-                                }).show();
+                        if (adapter.getCursor().getInt(7) == 0) {
+                            db.createEvent(dailyWinId);
+                            nailedIt.setTitle("Happy hour! +1");
+                        }
+                        else{
+                            nailedIt.setTitle("Znachi ovo je vec cekirano");
+                        }
 
+
+                        nailedIt.setCancelable(true);
+                        nailedIt.setCanceledOnTouchOutside(true);
+
+                        TextView poruka = (TextView) nailedIt.findViewById(R.id.plainMessage);
+                        poruka.setText(getMessage(MIN_RANGE, MAX_RANGE));
+
+                        ImageView badge = (ImageView) nailedIt.findViewById(R.id.badgeGlobal);
+                        ImageView badge2 = (ImageView) nailedIt.findViewById(R.id.badgeConsecutive);
+                        badge.setImageResource(R.drawable.yogaicon);
+                        badge2.setImageResource(R.drawable.checked);
+
+                        nailedIt.show();
+
+//                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(self, R.style.alertDialog);
+//                        alertDialog.setTitle("Poruka").setMessage(getMessage(MIN_RANGE,MAX_RANGE)+" "+consecutiveCount)
+//                                .setPositiveButton("Wohoo", new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                       dialog.cancel();
+//                                    }
+//                                }).show();
                     }
+
                     if (swipeDetector.getAction() == SwipeDetector.Action.RL) {
                         Cursor c = adapter.getCursor();
                         //gets frequency
@@ -138,7 +165,7 @@ public class MyActivity extends Activity {
                         c.moveToPosition(position);
                         db.archiveEvent(c.getInt(0));
                         adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
-                        new AlertDialog.Builder(self).setMessage("Crap! You deleted one. Douche.")
+                        new AlertDialog.Builder(self).setMessage("Deleted.")
                                 .setPositiveButton("M'kay", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.cancel();
@@ -177,7 +204,6 @@ public class MyActivity extends Activity {
                 v.setBackgroundColor(0xFF421C52);
                 weeklyButton.setBackgroundColor(0xFF666);
                 randomButton.setBackgroundColor(0xFF666);
-
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("daily"));
                 frequency = "daily";
 
@@ -189,7 +215,6 @@ public class MyActivity extends Activity {
                 v.setBackgroundColor(0xFF421C52);
                 dailyButton.setBackgroundColor(0xFF666);
                 randomButton.setBackgroundColor(0xFF666);
-
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
                 frequency = "weekly";
             }
@@ -200,26 +225,16 @@ public class MyActivity extends Activity {
                 v.setBackgroundColor(0xFF421C52);
                 dailyButton.setBackgroundColor(0xFF666);
                 weeklyButton.setBackgroundColor(0xFF666);
-
                 adapter.swapCursor(db.selectCheckedRecordsByFreq("random"));
                 frequency = "random";
             }
         });
     }
 
-
     private String getMessage(int min, int max) {
         randomNum = random.nextInt((max - min) + 1) + min;
-        return messageMap.get(randomNum);
-
+       // return messageMap.get(randomNum);
+        return db.getPlainMessage(randomNum);
     }
-
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        adapter.swapCursor(db.selectCheckedRecordsByFreq("weekly"));
-//
-//    }
 }
 
