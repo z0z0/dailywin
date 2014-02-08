@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import com.example.dailywin.utils.DateTimeUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -86,7 +87,7 @@ public class MyDB {
 
 
     public long createRecord(String name, String category, String freq, Integer importance) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
@@ -106,11 +107,11 @@ public class MyDB {
         return database.update(WIN_TABLE, values, WIN_ID + "= " + activity_id +"", null);
     }
 
-    public long createEvent(Integer dailywinId) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public long createEvent(Integer dailywinId, String date) {
+
         ContentValues values = new ContentValues();
         values.put(EVN_WIN, dailywinId);
-        values.put(EVN_CREATED, df.format(new Date()));
+        values.put(EVN_CREATED, date);
         return database.insert(EVN_TABLE, null, values);
     }
 
@@ -216,7 +217,7 @@ public class MyDB {
 
     public long consecutive (long dailyWinId) {
         consecutive = 0;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat(DateTimeUtil.dateTimeFormat);
         consecutiveDailyCount(dailyWinId, sdf.format(new Date()), 0) ;
         return consecutive;
 
@@ -246,9 +247,9 @@ public class MyDB {
     private boolean existsActivityOnDate (long dailyWinId, String date) {
         Cursor mCursor = database.rawQuery("select count(e._id)" +
                 "from Event e " +
-                "where e.created >= strftime('%Y-%m-%d 00:00:00','"+date+"','localtime') " +
-                "and e.created <= strftime('%Y-%m-%d 23:59:59','"+date+"','localtime') " +
-                " and e.dailywin_id = "+dailyWinId+" " , null);
+                "where e.created >= strftime('%Y-%m-%d 00:00:00','" + date + "','localtime') " +
+                "and e.created <= strftime('%Y-%m-%d 23:59:59','" + date + "','localtime') " +
+                " and e.dailywin_id = " + dailyWinId + " ", null);
 
         if (mCursor != null) {
             mCursor.moveToFirst();
