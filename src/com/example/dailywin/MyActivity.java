@@ -110,6 +110,7 @@ public class MyActivity extends Activity {
                         String freq = c.getString(4);
                         c.moveToPosition(position);
                         int dailyWinId = c.getInt(0);
+
                         db.createEvent(dailyWinId);
 
                         //calculate consecutive days
