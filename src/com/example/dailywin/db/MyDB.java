@@ -87,7 +87,7 @@ public class MyDB {
 
 
     public long createRecord(String name, String category, String freq, Integer importance) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat df = new SimpleDateFormat(DateTimeUtil.dateTimeFormat);
 
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
@@ -224,7 +224,7 @@ public class MyDB {
     }
     private long consecutiveDailyCount (long dailyWinId, String date, long count) {
         Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat(DateTimeUtil.dateFormat);
 
         try {
             cal.setTime(sdf.parse(date));
