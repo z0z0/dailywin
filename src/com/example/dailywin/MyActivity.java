@@ -11,12 +11,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.*;
 import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
 import com.example.dailywin.gestures.SwipeDetector;
+import com.example.dailywin.messages.Message;
+import com.example.dailywin.messages.MessageMan;
+import com.example.dailywin.utils.DateTimeUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -52,6 +56,7 @@ public class MyActivity extends Activity {
     String frequency = "daily";
     private int randomNum;
     private long consecutiveCount;
+    private Message message = new Message("mesazzz");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -125,8 +130,11 @@ public class MyActivity extends Activity {
 
 
                         if (adapter.getCursor().getInt(7) == 0) {
-                            db.createEvent(dailyWinId);
-                            nailedIt.setTitle("Happy hour! +1");
+                            SimpleDateFormat df = new SimpleDateFormat(DateTimeUtil.dateTimeFormat);
+                            Date d = new Date();
+                            db.createEvent(dailyWinId,df.format(d));
+                            message.setStrategy(new MessageMan(adapter.getCursor().getString(4),adapter.getCursor().getInt(5),d));
+                            nailedIt.setTitle(message.getMessage());
                         }
                         else{
                             nailedIt.setTitle("Znachi ovo je vec cekirano");
