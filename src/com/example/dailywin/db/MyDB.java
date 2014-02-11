@@ -87,12 +87,11 @@ public class MyDB {
 
 
     public long createRecord(String name, String category, String freq, Integer importance) {
-        SimpleDateFormat df = new SimpleDateFormat(DateTimeUtil.dateTimeFormat);
 
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
         values.put(WIN_CAT, "");
-        values.put(WIN_CREATED, df.format(new Date()));
+        values.put(WIN_CREATED, DateTimeUtil.getDefaultDateTimeFormat(new Date()));
         values.put(WIN_FREQ, freq);
         values.put(WIN_IMP, importance);
         values.put(WIN_F_ARH, false);
@@ -217,8 +216,8 @@ public class MyDB {
 
     public long consecutive (long dailyWinId) {
         consecutive = 0;
-        SimpleDateFormat sdf = new SimpleDateFormat(DateTimeUtil.dateTimeFormat);
-        consecutiveDailyCount(dailyWinId, sdf.format(new Date()), 0) ;
+
+        consecutiveDailyCount(dailyWinId, DateTimeUtil.getDefaultDateTimeFormat(new Date()), 0) ;
         return consecutive;
 
     }
@@ -233,15 +232,12 @@ public class MyDB {
         }
         cal.add(Calendar.DATE, -1);
         String d = sdf.format(cal.getTime());
-        long c = count;
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@ prosledjeno "+c);
+
         if (existsActivityOnDate(dailyWinId,d)) {
-            c++;
             consecutive++;
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@ "+c);
-            consecutiveDailyCount(dailyWinId, d, c);
+            consecutiveDailyCount(dailyWinId, d, consecutive);
         }
-        return c;
+        return consecutive;
     }
 
     private boolean existsActivityOnDate (long dailyWinId, String date) {

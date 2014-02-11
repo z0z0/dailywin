@@ -18,7 +18,6 @@ import com.example.dailywin.gestures.SwipeDetector;
 import com.example.dailywin.messages.PlainMessageGenerator;
 import com.example.dailywin.utils.DateTimeUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
@@ -109,9 +108,10 @@ public class MyActivity extends Activity {
                         Dialog nailedIt = new Dialog(self, R.style.alertDialog);
 
                         if (adapter.getCursor().getInt(7) == 0) {
-                            SimpleDateFormat df = new SimpleDateFormat(DateTimeUtil.dateTimeFormat);
-                            Date d = new Date();
-                            db.createEvent(dailyWinId,df.format(d));
+                            Date date = new Date();
+                            String d = DateTimeUtil.getDefaultDateTimeFormat(new Date());
+
+                            db.createEvent(dailyWinId,d);
 
                             consecutiveCount = db.consecutive(dailyWinId);
                             System.out.println("consecutive count " + consecutiveCount);
@@ -119,7 +119,7 @@ public class MyActivity extends Activity {
 
 
 
-                            String m =createNonBadgeMessage(adapter.getCursor().getString(4),adapter.getCursor().getInt(5),d);
+                            String m =createNonBadgeMessage(adapter.getCursor().getString(4),adapter.getCursor().getInt(5),date);
                             nailedIt.setTitle(m);
                         }
                         else{
