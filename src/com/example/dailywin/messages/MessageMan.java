@@ -55,7 +55,7 @@ public class MessageMan implements MessageStrategyApi {
     private String getTiming(Date timing) {
 
         if (DateTimeUtil.isAfter(timing, "18:00")) {
-            return "in the evening";
+            return "this evening";
         } else if (DateTimeUtil.isAfter(timing, "12:00")) {
             return "this afternoon";
         } else if (DateTimeUtil.isAfter(timing, "09:00")) {

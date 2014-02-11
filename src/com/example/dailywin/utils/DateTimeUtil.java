@@ -9,6 +9,7 @@ import java.util.Date;
 public class DateTimeUtil {
 
     public static final String dateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+    public static final String dateFormat = "yyyy-MM-dd";
 
     public static boolean isAfter (Date time, String hrs) {
         String[] timing = hrs.split(":");
