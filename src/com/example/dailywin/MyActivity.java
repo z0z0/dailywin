@@ -43,7 +43,7 @@ public class MyActivity extends Activity {
     String frequency = "daily";
     private int randomNum;
     private long consecutiveCount;
-    private PlainMessageGenerator message;
+    private PlainMessageGenerator message = new PlainMessageGenerator();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
