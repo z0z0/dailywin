@@ -15,14 +15,11 @@ import android.widget.*;
 import com.example.dailywin.adapters.ListViewAdapter;
 import com.example.dailywin.db.MyDB;
 import com.example.dailywin.gestures.SwipeDetector;
-import com.example.dailywin.messages.Message;
-import com.example.dailywin.messages.MessageMan;
+import com.example.dailywin.messages.PlainMessageGenerator;
 import com.example.dailywin.utils.DateTimeUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class MyActivity extends Activity {
@@ -30,8 +27,8 @@ public class MyActivity extends Activity {
     private Button addActivityButton;
     private ImageView profileImageView;
     Random random = new Random();
-    private static final int MIN_RANGE=1;
-    private static final int MAX_RANGE=35;
+    private static final int MIN_RANGE = 1;
+    private static final int MAX_RANGE = 35;
 
     /**
      * Called when the activity is first created.
@@ -46,7 +43,7 @@ public class MyActivity extends Activity {
     String frequency = "daily";
     private int randomNum;
     private long consecutiveCount;
-    private Message message = new Message("mesazzz");
+    private PlainMessageGenerator message;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,8 +119,8 @@ public class MyActivity extends Activity {
 
 
 
-                            message.setStrategy(new MessageMan(adapter.getCursor().getString(4),adapter.getCursor().getInt(5),d));
-                            nailedIt.setTitle(message.getMessage());
+                            String m =createNonBadgeMessage(adapter.getCursor().getString(4),adapter.getCursor().getInt(5),d);
+                            nailedIt.setTitle(m);
                         }
                         else{
                             nailedIt.setTitle("Znachi ovo je vec cekirano");
@@ -132,8 +129,6 @@ public class MyActivity extends Activity {
                         nailedIt.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                         nailedIt.setContentView(R.layout.nail_dialog);
-
-
 
 
                         nailedIt.setCancelable(true);
@@ -234,5 +229,10 @@ public class MyActivity extends Activity {
         randomNum = random.nextInt((max - min) + 1) + min;
         return db.getPlainMessage(randomNum);
     }
+
+    private String createNonBadgeMessage(String frequency, int importance, Date timing) {
+       return message.getRandomMessage(frequency,importance,timing);
+    }
+
 }
 

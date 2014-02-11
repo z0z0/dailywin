@@ -3,27 +3,40 @@ package com.example.dailywin.messages;
 import com.example.dailywin.utils.DateTimeUtil;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by zorana on 2/8/14.
  */
-public class MessageMan implements MessageStrategyApi {
+public class PlainMessageGenerator {
 
-    private static final String messageTemplate = "Man, %s happening for you %s %s!";
+    private static final String messageTemplate1 = "Man, %s happening for you %s %s!";
     private String frequency;
     private int importance;
     private Date timing;
 
-    public MessageMan(String frequency, int importance, Date timing) {
+    public static Map<Integer, String> messageMap = new HashMap<>();
+    private static final int MIN_RANGE=1;
+    private static final int MAX_RANGE=2;
+    private Random random = new Random();
+
+    static {
+        messageMap.put(1, "Man, %s happening for you %s %s!");
+        messageMap.put(2, "Rocked it today. Your %s activity is admirable!");
+    }
+
+    public PlainMessageGenerator(String frequency, int importance, Date timing) {
         this.frequency = frequency;
         this.importance = importance;
         this.timing = timing;
     }
 
 
-    @Override
-    public String getMessage() {
-        return String.format(messageTemplate, getImportance(importance), getFrequency(frequency), getTiming(timing));
+    public String getRandomMessage(String frequency, int importance, Date timing) {
+        int randomNum = random.nextInt((MAX_RANGE - MIN_RANGE) + 1) + MIN_RANGE;
+        return String.format(messageMap.get(randomNum), getImportance(importance), getFrequency(frequency), getTiming(timing));
     }
 
     private String getFrequency(String frequency) {
