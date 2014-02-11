@@ -1,9 +1,11 @@
 package com.example.dailywin;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -49,6 +51,11 @@ public class AddNewWinActivity extends Activity {
         radioGroup.check(resourceId);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         db = new MyDB(this);
+
+        name.setFocusableInTouchMode(true);
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

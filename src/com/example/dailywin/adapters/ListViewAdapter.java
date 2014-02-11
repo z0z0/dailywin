@@ -35,6 +35,8 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         TextView labela = (TextView) rowView.findViewById(R.id.listItemLabel);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
         labela.setText(c.getString(1));
+        TextView chk = (TextView) rowView.findViewById(R.id.itemChecked);
+        chk.setText(c.getString(7));
         // Change the icon
         int s = c.getInt(7);
         if (s == 1) {
@@ -51,6 +53,8 @@ public class ListViewAdapter extends SimpleCursorAdapter {
         TextView Labela = (TextView) rowView.findViewById(R.id.listItemLabel);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
         Labela.setText(c.getString(1));
+        TextView chk = (TextView) rowView.findViewById(R.id.itemChecked);
+        chk.setText(c.getString(7));
 
         int position = c.getPosition();
         // Change the icon for Windows and iPhone

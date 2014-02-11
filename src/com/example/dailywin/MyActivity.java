@@ -107,11 +107,7 @@ public class MyActivity extends Activity {
                         c.moveToPosition(position);
                         int dailyWinId = c.getInt(0);
 
-
                         //calculate consecutive days
-                        consecutiveCount = db.consecutive(dailyWinId);
-                        System.out.println("consecutive count " + consecutiveCount);
-                        adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
 
                         Dialog nailedIt = new Dialog(self, R.style.alertDialog);
 
@@ -119,6 +115,13 @@ public class MyActivity extends Activity {
                             SimpleDateFormat df = new SimpleDateFormat(DateTimeUtil.dateTimeFormat);
                             Date d = new Date();
                             db.createEvent(dailyWinId,df.format(d));
+
+                            consecutiveCount = db.consecutive(dailyWinId);
+                            System.out.println("consecutive count " + consecutiveCount);
+                            adapter.swapCursor(db.selectCheckedRecordsByFreq(freq));
+
+
+
                             message.setStrategy(new MessageMan(adapter.getCursor().getString(4),adapter.getCursor().getInt(5),d));
                             nailedIt.setTitle(message.getMessage());
                         }

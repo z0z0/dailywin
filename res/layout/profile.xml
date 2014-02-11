@@ -66,7 +66,8 @@
                 android:text="@string/historyText"
                 android:id="@+id/textHistory"
                 android:textAlignment="center"
-                android:gravity="center|center_vertical" />
+                android:gravity="center|center_vertical"
+                android:textSize="18dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +103,8 @@
                 android:text="@string/badgesText"
                 android:id="@+id/textBadges"
                 android:textAlignment="center"
-                android:gravity="center|center_vertical" />
+                android:gravity="center|center_vertical"
+                android:textSize="18dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -151,7 +153,8 @@
                 android:text="@string/textSettings"
                 android:id="@+id/settingsText"
                 android:textAlignment="center"
-                android:gravity="center|center_vertical" />
+                android:gravity="center|center_vertical"
+                android:textSize="40px" />
         </LinearLayout>
 
         <LinearLayout
