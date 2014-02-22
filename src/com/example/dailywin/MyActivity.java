@@ -18,6 +18,7 @@ import com.example.dailywin.gestures.SwipeDetector;
 import com.example.dailywin.messages.PlainMessageGenerator;
 import com.example.dailywin.utils.DateTimeUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 

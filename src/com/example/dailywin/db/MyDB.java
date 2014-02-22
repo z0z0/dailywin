@@ -204,9 +204,8 @@ public class MyDB {
         Cursor mCursor = database.rawQuery("select dw._id, dw.name, dw.category, dw.created, dw.freq, dw.importance, count(e._id) as win_count "+
                                             "from DailyWin dw left outer join Event e " +
                                             "on e.dailywin_id = dw._id "+
-                                            "where dw.f_arh = 0 " +
                                             "group by dw._id " +
-                                            "order by win_count desc" , null);
+                                            "order by win_count desc;" , null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }

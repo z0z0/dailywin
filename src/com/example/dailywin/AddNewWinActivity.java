@@ -28,9 +28,6 @@ public class AddNewWinActivity extends Activity {
     private EditText name;
     private MyDB db;
 
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         String checked = "daily";

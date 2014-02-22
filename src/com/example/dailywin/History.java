@@ -3,6 +3,7 @@ package com.example.dailywin;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.AbsListView;
 import android.widget.CursorAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -22,7 +23,6 @@ public class History extends Activity {
     private ListView historyList;
     private SimpleCursorAdapter adapter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,5 +36,6 @@ public class History extends Activity {
         historyList = (ListView) findViewById(R.id.historyView);
         adapter = new SimpleCursorAdapter(this, R.layout.history_item, cursor, new String[]{MyDB.WIN_NAME, "win_count"}, new int[]{R.id.historyItemLabel, R.id.historyItemTotal}, CursorAdapter.FLAG_AUTO_REQUERY);
         historyList.setAdapter(adapter);
+
     }
 }

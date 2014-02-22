@@ -72,7 +72,7 @@ public class PlainMessageGenerator {
             return "this early morning";
         } else if (DateTimeUtil.isAfter(timing, "05:00")) {
             return "crazy early this morning";
-        } else if (DateTimeUtil.isAfter(timing, "08:00")) {
+        } else if (DateTimeUtil.isAfter(timing, "00:00")) {
             return "late at night";
         }
         return null;
