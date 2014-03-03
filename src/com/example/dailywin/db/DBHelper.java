@@ -45,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public final static String BADGE_COLUMN_NAME = "name"; // name of the badge
     public final static String BADGE_COLUMN_TRIGGER = "trigger";  // number of times checked when the badge gets activated
     public final static String BADGE_COLUMN_ICON_URL = "icon_url"; // id of badge type
-    public final static String BADGE_TCOLUMN_TEXT = "text"; // id of badge type
+    public final static String BADGE_COLUMN_TEXT = "text"; // id of badge type
 
 
     public final static String TABLE_USER_BADGE = "UserBadge"; // name of table

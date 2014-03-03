@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.dailywin.model.Badge;
-import com.example.dailywin.model.BadgeType;
 
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class BadgeDAO {
     // Database fields
     private SQLiteDatabase database;
     private DBHelper dbHelper;
-    private String[] allColumns = {dbHelper.BAGDE_COLUMN_ID, dbHelper.BADGE_COLUMN_TYPE_ID, dbHelper.BADGE_COLUMN_NAME, dbHelper.BADGE_COLUMN_TRIGGER, dbHelper.BADGE_COLUMN_ICON_URL, dbHelper.BADGE_TCOLUMN_TEXT};
+    private String[] allColumns = {dbHelper.BAGDE_COLUMN_ID, dbHelper.BADGE_COLUMN_TYPE_ID, dbHelper.BADGE_COLUMN_NAME, dbHelper.BADGE_COLUMN_TRIGGER, dbHelper.BADGE_COLUMN_ICON_URL, dbHelper.BADGE_COLUMN_TEXT};
 
     public BadgeDAO(Context context) {
         dbHelper = new DBHelper(context);
@@ -77,11 +76,11 @@ public class BadgeDAO {
         ContentValues values = new ContentValues();
 
         values.put(dbHelper.BAGDE_COLUMN_ID, badge.getId());
-        values.put(dbHelper.BADGE_COLUMN_TYPE_ID, badge.getTypeId());
+        values.put(dbHelper.BADGE_COLUMN_TYPE_ID, badge.getBadgeTypeId());
         values.put(dbHelper.BADGE_COLUMN_NAME, badge.getName());
         values.put(dbHelper.BADGE_COLUMN_TRIGGER, badge.getTrigger());
         values.put(dbHelper.BADGE_COLUMN_ICON_URL, badge.getIconUrl());
-        values.put(dbHelper.BADGE_TCOLUMN_TEXT, badge.getColumnText());
+        values.put(dbHelper.BADGE_COLUMN_TEXT, badge.getColumnText());
 
 
         long insertId = database.insert(dbHelper.TABLE_BADGE, null, values);
@@ -101,11 +100,11 @@ public class BadgeDAO {
         Badge updatedBadge = null;
         ContentValues values = new ContentValues();
         values.put(dbHelper.BAGDE_COLUMN_ID, badge.getId());
-        values.put(dbHelper.BADGE_COLUMN_TYPE_ID, badge.getTypeId());
+        values.put(dbHelper.BADGE_COLUMN_TYPE_ID, badge.getBadgeTypeId());
         values.put(dbHelper.BADGE_COLUMN_NAME, badge.getName());
         values.put(dbHelper.BADGE_COLUMN_TRIGGER, badge.getTrigger());
         values.put(dbHelper.BADGE_COLUMN_ICON_URL, badge.getIconUrl());
-        values.put(dbHelper.BADGE_TCOLUMN_TEXT, badge.getIconUrl());
+        values.put(dbHelper.BADGE_COLUMN_TEXT, badge.getIconUrl());
 
         database.update(dbHelper.TABLE_BADGE, values, dbHelper.BAGDE_COLUMN_ID + " = " + badge.getId(), null);
         Cursor cursor = database.query(dbHelper.TABLE_BADGE, allColumns, dbHelper.BAGDE_COLUMN_ID + " = " + badge.getId(), null, null, null, null);
@@ -120,7 +119,7 @@ public class BadgeDAO {
     private Badge cursorToBadge(Cursor cursor) {
         Badge badge = new Badge();
         badge.setId(cursor.getInt(0));
-        badge.setTypeId(cursor.getInt(1));
+        badge.setBadgeTypeId(cursor.getInt(1));
         badge.setName(cursor.getString(2));
         badge.setIconUrl(cursor.getString(3));
         badge.setTrigger(cursor.getInt(4));
