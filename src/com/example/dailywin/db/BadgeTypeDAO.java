@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class BadgeTypeDAO {
 
-    private final String TAG = EventDAO.class.getSimpleName();
+    private final String TAG = BadgeTypeDAO.class.getSimpleName();
 
     // Database fields
     private SQLiteDatabase database;
@@ -76,7 +76,7 @@ public class BadgeTypeDAO {
         ContentValues values = new ContentValues();
 
         values.put(dbHelper.BAGDE_TYPE_COLUMN_ID, badgeType.getId());
-        values.put(dbHelper.BADGE_TYPE_COLUMN_NAME, badgeType.getType());
+        values.put(dbHelper.BADGE_TYPE_COLUMN_NAME, badgeType.getName());
         long insertId = database.insert(dbHelper.TABLE_BADGE_TYPE, null, values);
         Cursor cursor = database.query(dbHelper.TABLE_BADGE_TYPE, allColumns, dbHelper.BAGDE_TYPE_COLUMN_ID + " = " + insertId, null, null, null, null);
         if (cursor != null) {
@@ -92,7 +92,7 @@ public class BadgeTypeDAO {
         BadgeType updatedBadgeType = null;
         ContentValues values = new ContentValues();
         values.put(dbHelper.BAGDE_TYPE_COLUMN_ID, badgeType.getId());
-        values.put(dbHelper.BADGE_TYPE_COLUMN_NAME, badgeType.getType());
+        values.put(dbHelper.BADGE_TYPE_COLUMN_NAME, badgeType.getName());
         database.update(dbHelper.TABLE_BADGE_TYPE, values, dbHelper.BAGDE_TYPE_COLUMN_ID + " = " + badgeType.getId(), null);
         Cursor cursor = database.query(dbHelper.TABLE_BADGE_TYPE, allColumns, dbHelper.BAGDE_TYPE_COLUMN_ID + " = " + badgeType.getId(), null, null, null, null);
         if (cursor != null) {
@@ -106,7 +106,7 @@ public class BadgeTypeDAO {
     private BadgeType cursorToBadgeType(Cursor cursor) {
         BadgeType badgeType = new BadgeType();
         badgeType.setId(cursor.getInt(0));
-        badgeType.setType(cursor.getString(1));
+        badgeType.setName(cursor.getString(1));
         return badgeType;
     }
 

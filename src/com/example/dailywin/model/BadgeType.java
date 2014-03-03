@@ -9,7 +9,7 @@ import android.os.Parcelable;
 public class BadgeType implements Parcelable {
 
     private int id;
-    private String type;
+    private String name;
 
     public int describeContents() {
         return 0;
@@ -37,7 +37,7 @@ public class BadgeType implements Parcelable {
 
     private BadgeType(Parcel in) {
         id = in.readInt();
-        type = in.readString();
+        name = in.readString();
     }
 
     public int getId() {
@@ -48,12 +48,12 @@ public class BadgeType implements Parcelable {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String type) {
+        this.name = type;
     }
 
 }

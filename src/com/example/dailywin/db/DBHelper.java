@@ -45,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public final static String BADGE_COLUMN_NAME = "name"; // name of the badge
     public final static String BADGE_COLUMN_TRIGGER = "trigger";  // number of times checked when the badge gets activated
     public final static String BADGE_COLUMN_ICON_URL = "icon_url"; // id of badge type
-    public final static String BADGE_TCOLUMN_EXT = "text"; // id of badge type
+    public final static String BADGE_TCOLUMN_TEXT = "text"; // id of badge type
 
 
     public final static String TABLE_USER_BADGE = "UserBadge"; // name of table
@@ -59,7 +59,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_CREATE_TABLE1 = "create table NailIt ( id integer primary key, name text not null, created DATETIME not null, freq text not null, importance integer not null, f_arh int not null);";
     private static final String DATABASE_CREATE_TABLE2 = "create table Event ( id integer primary key,created DATETIME not null, nailit_id integer not null);";
-    private static final String DATABASE_CREATE_TABLE3 = "create table Badge ( id integer primary key, name text not null, trigger integer not null, badge_type_id integer not null, icon_url text not null, text text not null );";
+    private static final String DATABASE_CREATE_TABLE3 = "create table Badge ( id integer primary key, badge_type_id integer not null, name text not null, trigger integer not null, icon_url text not null, text text not null );";
     private static final String DATABASE_CREATE_TABLE4 = "create table BadgeType ( id integer primary key, name text not null);";
     private static final String DATABASE_CREATE_TABLE5 = "create table UserBadge ( id integer primary key, badge_id integer not null, timestamp DATETIME not null);";
     private static final String DATABASE_CREATE_TABLE6 = "create table PlainMessage ( id integer primary key, msg text not null);";

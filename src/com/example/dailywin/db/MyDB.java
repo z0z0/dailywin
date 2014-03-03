@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.example.dailywin.utils.DateTimeUtil;
 
 import java.text.ParseException;
@@ -19,7 +21,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class MyDB {
-    private ElementHelper dbHelper;
+    private DBHelper dbHelper;
 
     private SQLiteDatabase database;
     private int consecutive;
@@ -81,7 +83,7 @@ public class MyDB {
      * @param context
      */
     public MyDB(Context context) {
-        dbHelper = new ElementHelper(context);
+        dbHelper = new DBHelper(context);
         database = dbHelper.getWritableDatabase();
     }
 
@@ -172,13 +174,14 @@ public class MyDB {
      * has been checked within a week
     * */
     public Cursor selectCheckedRecordsByFreq(String freq) {
-            Cursor mCursor = database.rawQuery("select dw._id, dw.name, dw.category, dw.created, dw.freq, dw.importance, count(e._id) as count1, "+
+        Cursor mCursor = database.rawQuery("select dw._id, dw.name, dw.category, dw.created, dw.freq, dw.importance, count(e._id) as count1, "+
                             "(select count(e1._id) from Event e1  "+
                             " where e1.created >= strftime('%Y-%m-%d 00:00:00','now','localtime') and e1.dailywin_id = dw._id) as checked "+
                             "from DailyWin dw left join Event e on e.dailywin_id=dw._id "+
                             "where dw.freq='" + freq + "' "+
                             "and dw.f_arh = 0 group by dw._id order by dw._id desc"
                                     , null);
+
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
@@ -213,13 +216,44 @@ public class MyDB {
     }
 
 
-    public long consecutive (long dailyWinId) {
+    public long consecutive (long dailyWinId, String frequency) {
         consecutive = 0;
 
-        consecutiveDailyCount(dailyWinId, DateTimeUtil.getDefaultDateTimeFormat(new Date()), 0) ;
+        switch (frequency){
+            case "daily":
+                consecutiveDailyCount(dailyWinId, DateTimeUtil.getDefaultDateTimeFormat(new Date()), 0) ;
+                break;
+            case "weekly":
+                consecutiveWeeklyCount(dailyWinId, DateTimeUtil.getDefaultDateTimeFormat(new Date()), 0) ;
+                break;
+            default: break;
+        }
         return consecutive;
 
     }
+
+    private long consecutiveWeeklyCount(long dailyWinId, String date, long count) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(DateTimeUtil.dateFormat);
+
+        try {
+            cal.setTime(sdf.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cal.add(Calendar.DATE, -7);
+
+        String d = sdf.format(cal.getTime());
+
+
+        if (existsActivityOnWeek(dailyWinId,d)) {
+            consecutive++;
+            consecutiveWeeklyCount(dailyWinId, d, consecutive);
+        }
+        return consecutive;
+    }
+
+
     private long consecutiveDailyCount (long dailyWinId, String date, long count) {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat(DateTimeUtil.dateFormat);
@@ -249,7 +283,22 @@ public class MyDB {
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
+        return mCursor.getInt(0) > 0;
+
+    }
+
+    private boolean existsActivityOnWeek (long dailyWinId, String date) {
+        Cursor mCursor = database.rawQuery("select count(e._id)" +
+                "from Event e " +
+                "where strftime('%W', '"+ date +"')" +
+                "= strftime('%W', (select e1.created from event e1 where e1.dailywin_id = " + dailyWinId + "))" +
+                "and e.dailywin_id = " + dailyWinId + "", null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
         return mCursor.getInt(0)>0;
 
     }
+
 }
