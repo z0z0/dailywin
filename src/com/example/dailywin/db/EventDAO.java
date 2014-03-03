@@ -40,7 +40,7 @@ public class EventDAO {
         dbHelper.close();
     }
 
-    public Event getEventById(String id) {
+    public Event getEventById(int id) {
 
         open(true);
         Event event = null;

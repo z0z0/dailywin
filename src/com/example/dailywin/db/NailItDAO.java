@@ -125,8 +125,6 @@ public class NailItDAO {
         return updatedNailIt;
     }
 
-//selectCheckedRecordsByFreq
-    //todo return list
     public List<NailIt> getCheckedNailitsByFrequency(String freq) {
         open(true);
         List <NailIt> allNailIts = new ArrayList<>();
