@@ -41,12 +41,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public final static String TABLE_BADGE = "Badge"; // name of table
 
     public final static String BAGDE_COLUMN_ID = "id";  // id of badge
+    public final static String BADGE_COLUMN_TYPE_ID = "badge_type_id"; // id of badge type
     public final static String BADGE_COLUMN_NAME = "name"; // name of the badge
     public final static String BADGE_COLUMN_TRIGGER = "trigger";  // number of times checked when the badge gets activated
-    public final static String BADGE_COLUMN_TYPE_ID = "badge_type_id"; // id of badge type
     public final static String BADGE_COLUMN_ICON_URL = "icon_url"; // id of badge type
     public final static String BADGE_TCOLUMN_EXT = "text"; // id of badge type
-
 
 
     public final static String TABLE_USER_BADGE = "UserBadge"; // name of table
@@ -55,15 +54,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public final static String USER_BADGE_COLUMN_BADGE_ID = "badge_id"; // badge_id
     public final static String USER_BADGE_COLUMN_TMPSTMP = "timestamp"; // time
 
-
-    public final static String TABLE_BR_BAD_MESSAGES = "BreakingBadMessages"; // name of table
-
-    public final static String BR_BAD_COLUMN_ID = "id";  // id
-    public final static String BR_BAD_COLUMN_TEXT= "text"; // message text
-    public final static String BR_BAD_COLUMN_WMY = "week_month"; // this week, this month
-    public final static String BR_BAD_COLUMN_DWR = "d_w_r"; // daily/weekly/random
-    public final static String BR_BAD_COLUMN_IMPORTANCE = "importance_range"; // importance range
-    public final static String BR_BAD_COLUMN_HOURS = "hours_range"; // AM/PM
 
     private static final String DATABASE_NAME = "DBName";
     private static final int DATABASE_VERSION = 6;
