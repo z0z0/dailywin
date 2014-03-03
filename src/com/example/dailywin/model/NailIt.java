@@ -14,6 +14,7 @@ public class NailIt implements Parcelable {
     private String freq;
     private int importance;
     private int fArh;
+    private boolean checked;
 
     @Override
     public int describeContents() {
@@ -96,5 +97,14 @@ public class NailIt implements Parcelable {
 
     public void setfArh(int fArh) {
         this.fArh = fArh;
+    }
+
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

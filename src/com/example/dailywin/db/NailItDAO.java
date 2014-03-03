@@ -130,15 +130,15 @@ public class NailItDAO {
     public List<NailIt> getCheckedNailitsByFrequency(String freq) {
         open(true);
         List <NailIt> allNailIts = new ArrayList<>();
-        Cursor cursor = database.rawQuery("select dw.*, "+
+        Cursor cursor = database.rawQuery("select n.*, "+
                 "(select count(e1.id) from Event e1  "+
-                " where e1.created >= strftime('%Y-%m-%d 00:00:00','now','localtime') and e1.nailit_id = dw.id) as checked "+
-                "from NailIt dw left join Event e on e.nailit_id=dw.id "+
-                "where dw.freq='" + freq + "' "+
-                "and dw.f_arh = 0 group by dw.id order by dw.id desc"
+                " where e1.created >= strftime('%Y-%m-%d 00:00:00','now','localtime') and e1.nailit_id = n.id) as checked "+
+                "from NailIt n left join Event e on e.nailit_id=n.id "+
+                "where n.freq='" + freq + "' "+
+                "and n.f_arh = 0 group by n.id order by n.id desc"
                 , null);
         while (!cursor.isAfterLast()) {
-            NailIt nailIt = cursorToNailIt(cursor);
+            NailIt nailIt = cursorToNailItWithCheckedFlag(cursor);
             allNailIts.add(nailIt);
             cursor.moveToNext();
         }
@@ -163,6 +163,18 @@ public class NailItDAO {
         nailIt.setFreq(cursor.getString(3));
         nailIt.setImportance(cursor.getInt(4));
         nailIt.setfArh(cursor.getInt(5));
+        return nailIt;
+    }
+
+    private NailIt cursorToNailItWithCheckedFlag(Cursor cursor) {
+        NailIt nailIt = new NailIt();
+        nailIt.setId(cursor.getInt(0));
+        nailIt.setName(cursor.getString(1));
+        nailIt.setCreated(cursor.getString(2));
+        nailIt.setFreq(cursor.getString(3));
+        nailIt.setImportance(cursor.getInt(4));
+        nailIt.setfArh(cursor.getInt(5));
+        nailIt.setChecked(cursor.getInt(6) > 0 ? true : false);
         return nailIt;
     }
 
