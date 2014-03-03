@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import com.example.dailywin.db.MyDB;
+import com.example.dailywin.services.NailItService;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,6 +50,8 @@ public class AddNewWinActivity extends Activity {
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         db = new MyDB(this);
 
+
+
         name.setFocusableInTouchMode(true);
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -64,11 +67,19 @@ public class AddNewWinActivity extends Activity {
 
                 int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
                 String freq = checkedRadioButtonId == R.id.daily ? "daily" : checkedRadioButtonId == R.id.weekly ? "weekly" : "random";
-                db.createRecord(name.getText().toString(), null, freq, seekBar.getProgress());
+                db.createRecord(name.getText().toString(), freq, seekBar.getProgress());
 
                 Intent passCategory = new Intent(self, MyActivity.class);
                 passCategory.putExtra("freq_filter", freq);
                 startActivity(passCategory);
+
+                //this is ServiceTest
+
+                String strInputMsg = name.getText().toString();
+                Intent msgIntent = new Intent(self, NailItService.class);
+                msgIntent.putExtra(NailItService.PARAM_IN_MSG, strInputMsg);
+                startService(msgIntent);
+                System.out.println("@@@@@@@@@@@ servis " + name.getText().toString());
             }
         });
 

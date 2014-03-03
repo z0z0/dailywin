@@ -19,7 +19,7 @@ import java.util.Date;
  * To change this template use File | Settings | File Templates.
  */
 public class MyDB {
-    private ElementHelper dbHelper;
+    private DBHelper dbHelper;
 
     private SQLiteDatabase database;
     private int consecutive;
@@ -68,25 +68,16 @@ public class MyDB {
     public final static String USR_BADGE_TMPSTMP = "timestamp"; // time
 
 
-    public final static String BR_BAD_MESSAGES_TABLE = "BreakingBadMessages"; // name of table
-
-    public final static String BR_BAD_ID = "_id";  // id
-    public final static String BR_BAD_TEXT= "text"; // message text
-    public final static String BR_BAD_WMY = "week_month"; // this week, this month
-    public final static String BR_BAD_DWR = "d_w_r"; // daily/weekly/random
-    public final static String BR_BAD_IMPORTANCE = "importance_range"; // importance range
-    public final static String BR_BAD_HOURS = "hours_range"; // AM/PM
-
     /**
      * @param context
      */
     public MyDB(Context context) {
-        dbHelper = new ElementHelper(context);
+        dbHelper = new DBHelper(context);
         database = dbHelper.getWritableDatabase();
     }
 
 
-    public long createRecord(String name, String category, String freq, Integer importance) {
+    public long createRecord(String name, String freq, Integer importance) {
 
         ContentValues values = new ContentValues();
         values.put(WIN_NAME, name);
